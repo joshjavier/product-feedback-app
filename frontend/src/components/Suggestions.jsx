@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux'
+import { selectFilter } from '../reducers/filterReducer'
 import { selectSuggestions } from '../reducers/feedbacksReducer'
 import Feedback from './Feedback'
 
 const Suggestions = () => {
   const suggestions = useSelector(selectSuggestions)
+  const filter = useSelector(selectFilter)
 
   if (!suggestions) {
     <div className="card card-body">
@@ -13,9 +15,13 @@ const Suggestions = () => {
     </div>
   }
 
+  const filteredSuggestions = filter
+    ? suggestions.filter(item => item.category === filter)
+    : suggestions
+
   return (
     <div>
-      {suggestions.map(suggestion => (
+      {filteredSuggestions.map(suggestion => (
         <Feedback key={suggestion.id} feedback={suggestion} />
       ))}
     </div>
