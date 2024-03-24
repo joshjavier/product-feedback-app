@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { initializeFeedbacks } from './reducers/feedbacksReducer'
 import Suggestions from './components/Suggestions'
+import Filter from './components/Filter'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -17,16 +18,7 @@ const App = () => {
           <div>Frontend Mentor</div>
           <div>Feedback Board</div>
         </div>
-        <div className="card card-body">
-          <div className="card-actions">
-            <button className="btn btn-outline">All</button>
-            <button className="btn btn-outline">UI</button>
-            <button className="btn btn-outline">UX</button>
-            <button className="btn btn-outline">Enhancement</button>
-            <button className="btn btn-outline">Bug</button>
-            <button className="btn btn-outline">Feature</button>
-          </div>
-        </div>
+        <Filter />
         <div className="card card-body">
           <div className="card-title">Roadmap</div>
           <div>Planned 0</div>
