@@ -4,6 +4,7 @@ import { initializeFeedbacks } from './reducers/feedbacksReducer'
 import Suggestions from './components/Suggestions'
 import Filter from './components/Filter'
 import Header from './components/Header'
+import RoadmapSummary from './components/RoadmapSummary'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -20,12 +21,7 @@ const App = () => {
           <div>Feedback Board</div>
         </div>
         <Filter />
-        <div className="card card-body">
-          <div className="card-title">Roadmap</div>
-          <div>Planned 0</div>
-          <div>In-Progress 0</div>
-          <div>Live 0</div>
-        </div>
+        <RoadmapSummary />
       </div>
       <div className="w-full">
         <Header />

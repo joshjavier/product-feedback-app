@@ -23,3 +23,13 @@ export const selectSuggestions = createSelector(
       : suggestions
   },
 )
+
+export const selectStatusCount = createSelector(
+  [selectFeedbacks],
+  (feedbacks) => {
+    return feedbacks.reduce((count, item) => {
+      count[item.status] = (count[item.status] || 0) + 1
+      return count
+    }, {})
+  },
+)
