@@ -1,4 +1,15 @@
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { initializeFeedbacks } from './reducers/feedbacksReducer'
+import Suggestions from './components/Suggestions'
+
 const App = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(initializeFeedbacks())
+  }, [dispatch])
+
   return (
     <div className="container mx-auto px-4 max-w-[1110px] flex flex-col md:flex-row gap-[30px]">
       <div className="sidebar md:max-w-[255px]">
@@ -29,11 +40,7 @@ const App = () => {
           <div>Sort by: Most Upvotes</div>
           <button className="btn btn-primary">Add Feedback</button>
         </div>
-        <div className="card card-body">
-          <div>There is no feedback yet.</div>
-          <div>Got a suggestion? Found a bug that needs to be squashed? We love hearing about new ideas to improve our app.</div>
-          <button className="btn btn-primary">Add Feedback</button>
-        </div>
+        <Suggestions />
       </div>
     </div>
   )

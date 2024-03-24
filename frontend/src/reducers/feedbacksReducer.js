@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSelector, createSlice } from '@reduxjs/toolkit'
 import { addUpvote, removeUpvote } from './userReducer'
+import feedbacksService from '../services/feedbacks'
 
 export const feedbacksSlice = createSlice({
   initialState: [],
@@ -23,6 +24,11 @@ export const feedbacksSlice = createSlice({
 
 export const { set, append, update, upvote, downvote } = feedbacksSlice.actions
 
+export const initializeFeedbacks = () => async (dispatch) => {
+  const feedbacks = await feedbacksService.getAll()
+  dispatch(set(feedbacks))
+}
+
 export const upvoteFeedback = id => (dispatch) => {
   dispatch(addUpvote(id))
   dispatch(upvote(id))
@@ -34,3 +40,10 @@ export const downvoteFeedback = id => (dispatch) => {
 }
 
 export default feedbacksSlice.reducer
+
+export const selectSuggestions = createSelector(
+  [state => state.productRequests],
+  (productRequests) => {
+    return productRequests.filter(item => item.status === 'suggestion')
+  },
+)
