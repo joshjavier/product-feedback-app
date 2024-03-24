@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { initializeFeedbacks } from './reducers/feedbacksReducer'
 import Suggestions from './components/Suggestions'
 import Filter from './components/Filter'
+import Header from './components/Header'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -26,12 +27,8 @@ const App = () => {
           <div>Live 0</div>
         </div>
       </div>
-      <div>
-        <div className="card card-body">
-          <div>0 Suggestions</div>
-          <div>Sort by: Most Upvotes</div>
-          <button className="btn btn-primary">Add Feedback</button>
-        </div>
+      <div className="w-full">
+        <Header />
         <Suggestions />
       </div>
     </div>
