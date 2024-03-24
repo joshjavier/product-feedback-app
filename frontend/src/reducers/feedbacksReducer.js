@@ -1,4 +1,4 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { addUpvote, removeUpvote } from './userReducer'
 import feedbacksService from '../services/feedbacks'
 
@@ -40,10 +40,3 @@ export const downvoteFeedback = id => (dispatch) => {
 }
 
 export default feedbacksSlice.reducer
-
-export const selectSuggestions = createSelector(
-  [state => state.productRequests],
-  (productRequests) => {
-    return productRequests.filter(item => item.status === 'suggestion')
-  },
-)
