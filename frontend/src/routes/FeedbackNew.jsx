@@ -35,7 +35,7 @@ const FeedbackNew = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 max-w-[540px]">
+    <div className="mx-auto px-4 max-w-[540px]">
       <button
         onClick={() => navigate(-1)}
         className="btn btn-ghost"
