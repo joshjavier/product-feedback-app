@@ -13,16 +13,16 @@ export const feedbacksSlice = createSlice({
     update: (state, action) => {
       return state.map(item => item.id === action.payload.id ? action.payload : item)
     },
-    upvote: (state, action) => {
+    incrementUpvote: (state, action) => {
       return state.map(item => item.id === action.payload ? { ...item, upvotes: item.upvotes + 1 } : item)
     },
-    downvote: (state, action) => {
+    decrementUpvote: (state, action) => {
       return state.map(item => item.id === action.payload ? { ...item, upvotes: item.upvotes - 1 } : item)
     },
   },
 })
 
-export const { set, append, update, upvote, downvote } = feedbacksSlice.actions
+export const { set, append, update, incrementUpvote, decrementUpvote } = feedbacksSlice.actions
 
 export const initializeFeedbacks = () => async (dispatch) => {
   const feedbacks = await feedbacksService.getAll()
@@ -31,12 +31,12 @@ export const initializeFeedbacks = () => async (dispatch) => {
 
 export const upvoteFeedback = id => (dispatch) => {
   dispatch(addUpvote(id))
-  dispatch(upvote(id))
+  dispatch(incrementUpvote(id))
 }
 
 export const downvoteFeedback = id => (dispatch) => {
   dispatch(removeUpvote(id))
-  dispatch(downvote(id))
+  dispatch(decrementUpvote(id))
 }
 
 export default feedbacksSlice.reducer

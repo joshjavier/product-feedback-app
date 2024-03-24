@@ -1,6 +1,21 @@
 import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
+import { upvoteFeedback, downvoteFeedback } from '../reducers/feedbacksReducer'
+import { selectUpvotes } from '../selectors'
 
 const Feedback = ({ feedback }) => {
+  const upvotes = useSelector(selectUpvotes)
+  const isUpvoted = upvotes?.includes(feedback.id)
+  const dispatch = useDispatch()
+
+  const onClick = () => {
+    if (isUpvoted) {
+      dispatch(downvoteFeedback(feedback.id))
+    } else {
+      dispatch(upvoteFeedback(feedback.id))
+    }
+  }
+
   return (
     <div className="card card-body">
       <div className="card-title">{feedback.title}</div>
@@ -16,7 +31,12 @@ const Feedback = ({ feedback }) => {
         {' '}
         {feedback.upvotes}
         {' '}
-        <button className="btn">Upvote</button>
+        <button
+          onClick={onClick}
+          className={`btn ${isUpvoted ? 'btn-active' : ''}`}
+        >
+          Upvote
+        </button>
       </div>
     </div>
   )
@@ -24,6 +44,7 @@ const Feedback = ({ feedback }) => {
 
 Feedback.propTypes = {
   feedback: PropTypes.shape({
+    id: PropTypes.string,
     title: PropTypes.string,
     category: PropTypes.string,
     upvotes: PropTypes.number,

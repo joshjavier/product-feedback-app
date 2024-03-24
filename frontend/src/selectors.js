@@ -33,3 +33,5 @@ export const selectStatusCount = createSelector(
     }, {})
   },
 )
+
+export const selectUpvotes = state => state.currentUser?.upvotes
