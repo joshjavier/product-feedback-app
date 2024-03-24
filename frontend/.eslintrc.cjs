@@ -22,5 +22,6 @@ module.exports = {
       { allowConstantExport: true },
     ],
     '@stylistic/multiline-ternary': 'off',
+    '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: true }],
   },
 }
