@@ -29,6 +29,11 @@ export const initializeFeedbacks = () => async (dispatch) => {
   dispatch(set(feedbacks))
 }
 
+export const createFeedback = feedback => async (dispatch) => {
+  const newFeedback = await feedbacksService.create(feedback)
+  dispatch(append(newFeedback))
+}
+
 export const upvoteFeedback = id => (dispatch) => {
   dispatch(addUpvote(id))
   dispatch(incrementUpvote(id))

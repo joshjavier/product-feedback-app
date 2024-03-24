@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { createFeedback } from '../reducers/feedbacksReducer'
 
 const EMPTY = {
   title: '',
   category: 'feature',
-  detail: '',
+  description: '',
 }
 
 const UI = { value: 'ui', label: 'UI' }
@@ -18,6 +20,7 @@ const categories = [FEATURE, UI, UX, ENHANCEMENT, BUG]
 const FeedbackNew = () => {
   const [form, setForm] = useState(EMPTY)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const onChange = (evt) => {
     setForm(state => ({
@@ -28,7 +31,7 @@ const FeedbackNew = () => {
 
   const onSubmit = (evt) => {
     evt.preventDefault()
-    console.log(form)
+    dispatch(createFeedback(form))
   }
 
   return (
@@ -37,7 +40,7 @@ const FeedbackNew = () => {
         onClick={() => navigate(-1)}
         className="btn btn-ghost"
       >
-        Go back
+        Go Back
       </button>
       <form onSubmit={onSubmit}>
         <div className="card card-body">
@@ -78,7 +81,7 @@ const FeedbackNew = () => {
               className="textarea textarea-bordered"
               aria-describedby="detail-description"
               id="detail"
-              name="detail"
+              name="description"
               value={form.detail}
               onChange={onChange}
             />
