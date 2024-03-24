@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { selectSuggestions } from '../selectors'
 import SortSelect from './SortSelect'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   const suggestions = useSelector(selectSuggestions)
@@ -13,7 +14,7 @@ const Header = () => {
         Suggestions
       </div>
       <SortSelect />
-      <button className="btn btn-primary">Add Feedback</button>
+      <Link to="/feedback-new" className="btn btn-primary">Add Feedback</Link>
     </div>
   )
 }

@@ -4,6 +4,7 @@ import { initializeFeedbacks } from './reducers/feedbacksReducer'
 import { initializeUser } from './reducers/userReducer'
 import { Route, Routes } from 'react-router-dom'
 import Index from './routes/Index'
+import FeedbackNew from './routes/FeedbackNew'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -16,6 +17,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Index />} />
+      <Route path="/feedback-new" element={<FeedbackNew />} />
     </Routes>
   )
 }
