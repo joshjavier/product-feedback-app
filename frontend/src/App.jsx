@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { initializeFeedbacks } from './reducers/feedbacksReducer'
+import { initializeUser } from './reducers/userReducer'
 import Suggestions from './components/Suggestions'
 import Filter from './components/Filter'
 import Header from './components/Header'
@@ -11,6 +12,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeFeedbacks())
+    dispatch(initializeUser())
   }, [dispatch])
 
   return (
