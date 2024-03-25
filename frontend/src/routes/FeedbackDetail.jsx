@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import Feedback from '../components/Feedback'
-import Comment from '../components/Comment'
+import Comments from '../components/Comments'
 
 const FeedbackDetail = () => {
   const navigate = useNavigate()
@@ -22,22 +22,7 @@ const FeedbackDetail = () => {
         <button className="btn btn-primary">Edit Feedback</button>
       </div>
       <Feedback feedback={feedback} />
-      <div className="card card-body">
-        <h2 className="card-title">
-          {feedback.comments?.length || 0}
-          {' '}
-          {feedback.comments?.length === 1 ? 'Comment' : 'Comments'}
-        </h2>
-        {feedback.comments && (
-          <ul>
-            {feedback.comments.map(comment => (
-              <li key={comment.id}>
-                <Comment comment={comment} />
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <Comments comments={feedback.comments} />
     </div>
   )
 }
