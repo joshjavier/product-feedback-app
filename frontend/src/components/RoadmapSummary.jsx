@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux'
+import { shallowEqual, useSelector } from 'react-redux'
 import { selectStatusCount } from '../selectors'
 import { Link } from 'react-router-dom'
 
 const RoadmapSummary = () => {
-  const count = useSelector(selectStatusCount)
+  const count = useSelector(selectStatusCount, shallowEqual)
 
   return (
     <div className="card card-body">
