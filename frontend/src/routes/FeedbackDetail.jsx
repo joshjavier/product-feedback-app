@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import Feedback from '../components/Feedback'
+import AddComment from '../components/AddComment'
 import Comments from '../components/Comments'
 
 const FeedbackDetail = () => {
@@ -23,6 +24,7 @@ const FeedbackDetail = () => {
       </div>
       <Feedback feedback={feedback} />
       <Comments comments={feedback.comments} />
+      <AddComment />
     </div>
   )
 }
