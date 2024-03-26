@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { setFilter } from '../reducers/filterReducer'
+import { setFilter } from '../reducers/uiReducer'
 import { selectFilter } from '../selectors'
 
 const ALL = { value: null, label: 'All' }

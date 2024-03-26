@@ -1,8 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit'
 
 export const selectFeedbacks = state => state.productRequests
-export const selectFilter = state => state.filter
-export const selectSort = state => state.sort
+export const selectFilter = state => state.ui.filter
+export const selectSort = state => state.ui.sort
 
 const sortBy = {
   mostUpvotes: (a, b) => b.upvotes - a.upvotes,

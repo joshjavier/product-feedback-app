@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { sortBy } from '../reducers/sortReducer'
+import { sortBy } from '../reducers/uiReducer'
 import { selectSort } from '../selectors'
 
 const options = [
