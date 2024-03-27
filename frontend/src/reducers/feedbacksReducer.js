@@ -1,10 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {
+  createAsyncThunk,
+  createEntityAdapter,
+  createSlice,
+} from '@reduxjs/toolkit'
 import { addUpvote, removeUpvote } from './userReducer'
 import feedbacksService from '../services/feedbacks'
+import productRequests from '../services/productRequests'
+
+const feedbacksAdapter = createEntityAdapter()
+
+const initialState = feedbacksAdapter.getInitialState({
+  status: 'idle',
+  error: null,
+})
+
+export const fetchProductRequests = createAsyncThunk(
+  'productRequests/fetchProductRequests',
+  productRequests.getAll,
+)
 
 export const feedbacksSlice = createSlice({
-  initialState: [],
-  name: 'productRequests',
+  initialState,
+  name: 'feedbacks',
   reducers: {
     set: (state, action) => action.payload,
     append: (state, action) => {
@@ -19,6 +36,29 @@ export const feedbacksSlice = createSlice({
     decrementUpvote: (state, action) => {
       return state.map(item => item.id === action.payload ? { ...item, upvotes: item.upvotes - 1 } : item)
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProductRequests.pending, (state) => {
+        state.status = 'loading'
+      })
+      .addCase(fetchProductRequests.fulfilled, (state, action) => {
+        const productRequests = action.payload
+        productRequests.forEach((productRequest) => {
+          if ('comments' in productRequest) {
+            const getIds = (acc, val) => [...acc, val.id]
+            const commentIds = productRequest.comments.reduce(getIds, [])
+            productRequest.comments = commentIds
+          }
+        })
+        feedbacksAdapter.upsertMany(state, productRequests)
+
+        state.status = 'succeeded'
+      })
+      .addCase(fetchProductRequests.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
+      })
   },
 })
 
@@ -45,3 +85,9 @@ export const downvoteFeedback = id => (dispatch) => {
 }
 
 export default feedbacksSlice.reducer
+
+export const {
+  selectAll: selectAllFeedbacks,
+  selectById: selectFeedbackById,
+  selectIds: selectFeedbackIds,
+} = feedbacksAdapter.getSelectors(state => state.feedbacks)

@@ -1,4 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit'
+import { selectAllFeedbacks } from './reducers/feedbacksReducer'
 
 export const selectFeedbacks = state => state.productRequests
 export const selectFilter = state => state.ui.filter
@@ -12,7 +13,7 @@ const sortBy = {
 }
 
 export const selectSuggestions = createSelector(
-  [selectFeedbacks, selectFilter, selectSort],
+  [selectAllFeedbacks, selectFilter, selectSort],
   (feedbacks, filter, sort) => {
     const suggestions = feedbacks.filter(item => item.status === 'suggestion')
     const compareFn = sortBy[sort]
@@ -25,7 +26,7 @@ export const selectSuggestions = createSelector(
 )
 
 export const selectStatusCount = createSelector(
-  [selectFeedbacks],
+  [selectAllFeedbacks],
   (feedbacks) => {
     return feedbacks.reduce((count, item) => {
       count[item.status] = (count[item.status] || 0) + 1

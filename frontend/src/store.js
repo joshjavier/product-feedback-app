@@ -6,7 +6,7 @@ import uiReducer from './reducers/uiReducer'
 export const store = configureStore({
   reducer: {
     currentUser: userReducer,
-    productRequests: feedbacksReducer,
+    feedbacks: feedbacksReducer,
     ui: uiReducer,
   },
 })
