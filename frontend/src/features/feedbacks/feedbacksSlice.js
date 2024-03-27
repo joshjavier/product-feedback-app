@@ -4,9 +4,15 @@ import {
   createSelector,
   createSlice,
 } from '@reduxjs/toolkit'
+import { normalize, schema } from 'normalizr'
 import { addUpvote, removeUpvote } from '../../reducers/userReducer'
 import feedbacksService from '../../services/feedbacks'
 import productRequests from '../../services/productRequests'
+
+// Define schemas
+const user = new schema.Entity('users', {}, { idAttribute: 'username' })
+const comment = new schema.Entity('comments', { user })
+const feedback = new schema.Entity('feedbacks', { comments: [comment] })
 
 const feedbacksAdapter = createEntityAdapter()
 
@@ -17,7 +23,11 @@ const initialState = feedbacksAdapter.getInitialState({
 
 export const fetchProductRequests = createAsyncThunk(
   'productRequests/fetchProductRequests',
-  productRequests.getAll,
+  async () => {
+    const data = await productRequests.getAll()
+    const normalized = normalize(data, [feedback])
+    return normalized.entities
+  },
 )
 
 const feedbacksSlice = createSlice({
@@ -44,16 +54,7 @@ const feedbacksSlice = createSlice({
         state.status = 'loading'
       })
       .addCase(fetchProductRequests.fulfilled, (state, action) => {
-        const productRequests = action.payload
-        productRequests.forEach((productRequest) => {
-          if ('comments' in productRequest) {
-            const getIds = (acc, val) => [...acc, val.id]
-            const commentIds = productRequest.comments.reduce(getIds, [])
-            productRequest.comments = commentIds
-          }
-        })
-        feedbacksAdapter.upsertMany(state, productRequests)
-
+        feedbacksAdapter.upsertMany(state, action.payload.feedbacks)
         state.status = 'succeeded'
       })
       .addCase(fetchProductRequests.rejected, (state, action) => {
