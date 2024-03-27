@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { fetchProductRequests } from './reducers/feedbacksReducer'
+import { fetchProductRequests } from './features/feedbacks/feedbacksSlice'
 import { initializeUser } from './reducers/userReducer'
 import { Route, Routes } from 'react-router-dom'
 import Index from './routes/Index'

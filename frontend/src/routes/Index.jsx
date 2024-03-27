@@ -1,7 +1,7 @@
 import Filter from '../components/Filter'
 import Header from '../components/Header'
 import RoadmapSummary from '../components/RoadmapSummary'
-import Suggestions from '../components/Suggestions'
+import Suggestions from '../features/feedbacks/Suggestions'
 
 const Index = () => {
   return (

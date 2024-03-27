@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import Feedback from '../components/Feedback'
+import Feedback from '../features/feedbacks/Feedback'
 import AddComment from '../components/AddComment'
 import Comments from '../components/Comments'
 

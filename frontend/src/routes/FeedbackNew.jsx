@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { createFeedback } from '../reducers/feedbacksReducer'
+import { createFeedback } from '../features/feedbacks/feedbacksSlice'
 
 const EMPTY = {
   title: '',

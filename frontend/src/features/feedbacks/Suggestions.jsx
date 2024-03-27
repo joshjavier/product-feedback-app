@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { selectSuggestions } from '../selectors'
+import { selectSuggestions } from '../../selectors'
 import Feedback from './Feedback'
 import { Link } from 'react-router-dom'
 

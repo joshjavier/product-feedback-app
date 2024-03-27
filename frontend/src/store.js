@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userReducer from './reducers/userReducer'
-import feedbacksReducer from './reducers/feedbacksReducer'
+import feedbacksReducer from './features/feedbacks/feedbacksSlice'
 import uiReducer from './reducers/uiReducer'
 
 export const store = configureStore({

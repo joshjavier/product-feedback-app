@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
-import { upvoteFeedback, downvoteFeedback } from '../reducers/feedbacksReducer'
-import { selectUpvotes } from '../selectors'
+import { upvoteFeedback, downvoteFeedback } from './feedbacksSlice'
+import { selectUpvotes } from '../../selectors'
 import { Link } from 'react-router-dom'
 
 const Feedback = ({ feedback }) => {

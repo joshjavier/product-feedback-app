@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { selectAllFeedbacks } from './reducers/feedbacksReducer'
+import { selectAllFeedbacks } from './features/feedbacks/feedbacksSlice'
 
 export const selectFeedbacks = state => state.productRequests
 export const selectFilter = state => state.ui.filter

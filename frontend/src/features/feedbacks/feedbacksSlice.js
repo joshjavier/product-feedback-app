@@ -3,9 +3,9 @@ import {
   createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit'
-import { addUpvote, removeUpvote } from './userReducer'
-import feedbacksService from '../services/feedbacks'
-import productRequests from '../services/productRequests'
+import { addUpvote, removeUpvote } from '../../reducers/userReducer'
+import feedbacksService from '../../services/feedbacks'
+import productRequests from '../../services/productRequests'
 
 const feedbacksAdapter = createEntityAdapter()
 
