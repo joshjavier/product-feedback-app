@@ -1,6 +1,7 @@
 import {
   createAsyncThunk,
   createEntityAdapter,
+  createSelector,
   createSlice,
 } from '@reduxjs/toolkit'
 import { addUpvote, removeUpvote } from '../../reducers/userReducer'
@@ -19,7 +20,7 @@ export const fetchProductRequests = createAsyncThunk(
   productRequests.getAll,
 )
 
-export const feedbacksSlice = createSlice({
+const feedbacksSlice = createSlice({
   initialState,
   name: 'feedbacks',
   reducers: {
@@ -91,3 +92,30 @@ export const {
   selectById: selectFeedbackById,
   selectIds: selectFeedbackIds,
 } = feedbacksAdapter.getSelectors(state => state.feedbacks)
+
+export const selectFeedbacksByStatus = createSelector(
+  [selectAllFeedbacks, (state, status) => status],
+  (feedbacks, status) => feedbacks.filter(feedback => feedback.status === status),
+)
+
+export const selectFilteredFeedbacks = createSelector(
+  [selectFeedbacksByStatus, state => state.ui.filter],
+  (feedbacks, category) => {
+    return category
+      ? feedbacks.filter(feedback => feedback.category === category)
+      : feedbacks
+  },
+)
+
+export const selectSortedFeedbacks = createSelector(
+  [selectFilteredFeedbacks, state => state.ui.sort],
+  (feedbacks, sort) => {
+    const compareFn = {
+      mostUpvotes: (a, b) => b.upvotes - a.upvotes,
+      leastUpvotes: (a, b) => a.upvotes - b.upvotes,
+      mostComments: (a, b) => (b.comments?.length || 0) - (a.comments?.length || 0),
+      leastComments: (a, b) => (a.comments?.length || 0) - (b.comments?.length || 0),
+    }
+    return feedbacks.toSorted(compareFn[sort])
+  },
+)

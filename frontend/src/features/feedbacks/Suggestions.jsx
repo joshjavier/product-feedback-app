@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux'
-import { selectSuggestions } from '../../selectors'
+import { selectSortedFeedbacks } from './feedbacksSlice'
 import Feedback from './Feedback'
 import { Link } from 'react-router-dom'
 
 const Suggestions = () => {
-  const suggestions = useSelector(selectSuggestions)
+  const suggestions = useSelector(state => selectSortedFeedbacks(state, 'suggestion'))
 
   if (!suggestions) {
     <div className="card card-body">

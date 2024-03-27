@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { setFilter } from '../reducers/uiReducer'
-import { selectFilter } from '../selectors'
 
 const ALL = { value: null, label: 'All' }
 const UI = { value: 'ui', label: 'UI' }
@@ -12,7 +11,7 @@ const FEATURE = { value: 'feature', label: 'Feature' }
 const filters = [ALL, UI, UX, ENHANCEMENT, BUG, FEATURE]
 
 const Filter = () => {
-  const active = useSelector(selectFilter)
+  const active = useSelector(state => state.ui.filter)
   const dispatch = useDispatch()
 
   const onClick = (evt) => {
