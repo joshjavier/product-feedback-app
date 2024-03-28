@@ -5,7 +5,7 @@ const initialState = {
   sort: 'mostUpvotes',
 }
 
-export const uiSlice = createSlice({
+const uiSlice = createSlice({
   initialState,
   name: 'ui',
   reducers: {

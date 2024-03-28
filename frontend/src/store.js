@@ -3,7 +3,7 @@ import userReducer from './reducers/userReducer'
 import feedbacksReducer from './features/feedbacks/feedbacksSlice'
 import commentsReducer from './features/comments/commentsSlice'
 import usersReducer from './features/users/usersSlice'
-import uiReducer from './reducers/uiReducer'
+import uiReducer from './features/ui/uiSlice'
 
 export const store = configureStore({
   reducer: {
