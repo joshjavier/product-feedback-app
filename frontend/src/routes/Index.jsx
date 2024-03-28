@@ -1,4 +1,4 @@
-import Filter from '../components/Filter'
+import Filter from '../features/ui/Filter'
 import Header from '../components/Header'
 import RoadmapSummary from '../components/RoadmapSummary'
 import Suggestions from '../features/feedbacks/Suggestions'

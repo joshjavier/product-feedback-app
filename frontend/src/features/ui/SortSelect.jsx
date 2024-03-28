@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { sortBy } from '../features/ui/uiSlice'
+import { sortBy } from './uiSlice'
 
 const options = [
   { value: 'mostUpvotes', label: 'Most Upvotes' },

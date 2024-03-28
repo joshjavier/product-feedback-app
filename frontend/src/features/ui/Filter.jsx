@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { setFilter } from '../features/ui/uiSlice'
+import { setFilter } from './uiSlice'
 
 const ALL = { value: null, label: 'All' }
 const UI = { value: 'ui', label: 'UI' }

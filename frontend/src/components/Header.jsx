@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { selectSortedFeedbacks } from '../features/feedbacks/feedbacksSlice'
-import SortSelect from './SortSelect'
+import SortSelect from '../features/ui/SortSelect'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
@@ -11,7 +11,7 @@ const Header = () => {
       <div>
         {suggestions.length}
         {' '}
-        Suggestions
+        {suggestions.length === 1 ? 'Suggestion' : 'Suggestions'}
       </div>
       <SortSelect />
       <Link to="/feedback-new" className="btn btn-primary">Add Feedback</Link>
