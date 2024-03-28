@@ -5,7 +5,7 @@ import {
   createSlice,
 } from '@reduxjs/toolkit'
 import { normalize, schema } from 'normalizr'
-import { addUpvote, removeUpvote } from '../../reducers/userReducer'
+import { addUpvote, removeUpvote } from '../currentUser/currentUserSlice'
 import feedbacksService from '../../services/feedbacks'
 import productRequests from '../../services/productRequests'
 

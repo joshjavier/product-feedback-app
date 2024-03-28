@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-import userService from '../services/user'
+import userService from '../../services/user'
 
-export const userSlice = createSlice({
+const userSlice = createSlice({
   initialState: null,
   name: 'currentUser',
   reducers: {
