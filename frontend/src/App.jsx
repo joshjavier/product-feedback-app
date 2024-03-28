@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchProductRequests } from './features/feedbacks/feedbacksSlice'
-import { initializeUser } from './features/currentUser/currentUserSlice'
+import { fetchCurrentUser } from './features/currentUser/currentUserSlice'
 import { Route, Routes } from 'react-router-dom'
 import Index from './routes/Index'
 import FeedbackNew from './routes/FeedbackNew'
@@ -13,7 +13,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchProductRequests())
-    dispatch(initializeUser())
+    dispatch(fetchCurrentUser())
   }, [dispatch])
 
   return (
