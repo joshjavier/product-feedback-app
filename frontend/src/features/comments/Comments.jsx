@@ -11,9 +11,9 @@ const Comments = ({ comments }) => {
       </h2>
       {comments && (
         <ul>
-          {comments.map(comment => (
-            <li key={comment.id}>
-              <Comment comment={comment} />
+          {comments.map(commentId => (
+            <li key={commentId}>
+              <Comment commentId={commentId} />
             </li>
           ))}
         </ul>

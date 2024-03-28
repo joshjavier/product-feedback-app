@@ -1,13 +1,14 @@
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { selectFeedbackById } from '../features/feedbacks/feedbacksSlice'
 import Feedback from '../features/feedbacks/Feedback'
-import AddComment from '../components/AddComment'
-import Comments from '../components/Comments'
+import AddComment from '../features/comments/AddComment'
+import Comments from '../features/comments/Comments'
 
 const FeedbackDetail = () => {
   const navigate = useNavigate()
   const { id } = useParams()
-  const feedback = useSelector(state => state.productRequests.find(item => item.id === id))
+  const feedback = useSelector(state => selectFeedbackById(state, id))
 
   if (!feedback) return
 
