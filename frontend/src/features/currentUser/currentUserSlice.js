@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { upvoteFeedback } from '../feedbacks/feedbacksSlice'
 import currentUser from '../../services/currentUser'
 
 export const fetchCurrentUser = createAsyncThunk(
@@ -9,16 +10,7 @@ export const fetchCurrentUser = createAsyncThunk(
 const userSlice = createSlice({
   initialState: null,
   name: 'currentUser',
-  reducers: {
-    addUpvote: (state, action) => ({
-      ...state,
-      upvotes: [...state.upvotes, action.payload],
-    }),
-    removeUpvote: (state, action) => ({
-      ...state,
-      upvotes: state.upvotes.filter(id => id !== action.payload),
-    }),
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
@@ -29,11 +21,17 @@ const userSlice = createSlice({
           upvotedFeedbacks: [],
         }
       })
-      // .addCase()
-      // .addCase()
+      .addCase(upvoteFeedback.fulfilled, (state, action) => {
+        if (state.upvotedFeedbacks.includes(action.payload.id)) {
+          return {
+            ...state,
+            upvotedFeedbacks: state.upvotedFeedbacks.filter(id => id !== action.payload.id),
+          }
+        } else {
+          state.upvotedFeedbacks.push(action.payload.id)
+        }
+      })
   },
 })
-
-export const { addUpvote, removeUpvote } = userSlice.actions
 
 export default userSlice.reducer

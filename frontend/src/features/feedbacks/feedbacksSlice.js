@@ -5,8 +5,6 @@ import {
   createSlice,
 } from '@reduxjs/toolkit'
 import { normalize, schema } from 'normalizr'
-import { addUpvote, removeUpvote } from '../currentUser/currentUserSlice'
-import feedbacksService from '../../services/feedbacks'
 import productRequests from '../../services/productRequests'
 
 // Define schemas
@@ -61,30 +59,40 @@ const feedbacksSlice = createSlice({
         state.status = 'failed'
         state.error = action.error.message
       })
+      .addCase(upvoteFeedback.fulfilled, feedbacksAdapter.updateOne)
   },
 })
 
 export const { set, append, update, incrementUpvote, decrementUpvote } = feedbacksSlice.actions
 
-export const initializeFeedbacks = () => async (dispatch) => {
-  const feedbacks = await feedbacksService.getAll()
-  dispatch(set(feedbacks))
-}
-
 export const createFeedback = feedback => async (dispatch) => {
-  const newFeedback = await feedbacksService.create(feedback)
-  dispatch(append(newFeedback))
+  // const newFeedback = await feedbacksService.create(feedback)
+  // dispatch(append(newFeedback))
 }
 
-export const upvoteFeedback = id => (dispatch) => {
-  dispatch(addUpvote(id))
-  dispatch(incrementUpvote(id))
-}
+export const upvoteFeedback = createAsyncThunk(
+  'feedbacks/upvoteFeedback',
+  async (id, { getState }) => {
+    let vote, { upvotedFeedbacks } = getState().currentUser
+    const isUpvoted = upvotedFeedbacks.includes(id)
 
-export const downvoteFeedback = id => (dispatch) => {
-  dispatch(removeUpvote(id))
-  dispatch(decrementUpvote(id))
-}
+    if (isUpvoted) {
+      vote = -1
+      upvotedFeedbacks = upvotedFeedbacks.filter(feedbackId => feedbackId !== id)
+    } else {
+      vote = 1
+      upvotedFeedbacks = [...upvotedFeedbacks, id]
+    }
+
+    const upvotes = selectFeedbackById(getState(), id).upvotes + vote
+
+    // API calls here
+    // await productRequests.updateOne({ id, upvotes })
+    // await currentUser.update({ upvotedFeedbacks })
+
+    return { id, changes: { upvotes } }
+  },
+)
 
 export default feedbacksSlice.reducer
 
