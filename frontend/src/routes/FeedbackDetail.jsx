@@ -24,7 +24,7 @@ const FeedbackDetail = () => {
         <Link to="edit" className="btn btn-primary">Edit Feedback</Link>
       </div>
       <Feedback feedback={feedback} />
-      <Comments comments={feedback.comments} />
+      <Comments />
       <AddComment />
     </div>
   )
