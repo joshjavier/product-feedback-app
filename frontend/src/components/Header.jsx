@@ -1,19 +1,20 @@
 import { useSelector } from 'react-redux'
-import { selectSuggestions } from '../selectors'
-import SortSelect from './SortSelect'
+import { selectSortedFeedbacks } from '../features/feedbacks/feedbacksSlice'
+import SortSelect from '../features/ui/SortSelect'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
-  const suggestions = useSelector(selectSuggestions)
+  const suggestions = useSelector(state => selectSortedFeedbacks(state, 'suggestion'))
 
   return (
     <div className="card card-body">
       <div>
         {suggestions.length}
         {' '}
-        Suggestions
+        {suggestions.length === 1 ? 'Suggestion' : 'Suggestions'}
       </div>
       <SortSelect />
-      <button className="btn btn-primary">Add Feedback</button>
+      <Link to="/feedback-new" className="btn btn-primary">Add Feedback</Link>
     </div>
   )
 }

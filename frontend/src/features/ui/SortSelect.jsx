@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { sortBy } from '../reducers/sortReducer'
-import { selectSort } from '../selectors'
+import { sortBy } from './uiSlice'
 
 const options = [
   { value: 'mostUpvotes', label: 'Most Upvotes' },
@@ -10,7 +9,7 @@ const options = [
 ]
 
 const SortSelect = () => {
-  const sort = useSelector(selectSort)
+  const sort = useSelector(state => state.ui.sort)
   const dispatch = useDispatch()
 
   const onChange = (evt) => {

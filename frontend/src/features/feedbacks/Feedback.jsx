@@ -1,24 +1,22 @@
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
-import { upvoteFeedback, downvoteFeedback } from '../reducers/feedbacksReducer'
-import { selectUpvotes } from '../selectors'
+import { upvoteFeedback } from './feedbacksSlice'
+import { Link } from 'react-router-dom'
 
 const Feedback = ({ feedback }) => {
-  const upvotes = useSelector(selectUpvotes)
-  const isUpvoted = upvotes?.includes(feedback.id)
+  const upvotedFeedbacks = useSelector(state => state.currentUser?.upvotedFeedbacks)
+  const isUpvoted = upvotedFeedbacks?.includes(feedback.id)
   const dispatch = useDispatch()
 
   const onClick = () => {
-    if (isUpvoted) {
-      dispatch(downvoteFeedback(feedback.id))
-    } else {
-      dispatch(upvoteFeedback(feedback.id))
-    }
+    dispatch(upvoteFeedback(feedback.id))
   }
 
   return (
     <div className="card card-body">
-      <div className="card-title">{feedback.title}</div>
+      <div className="card-title">
+        <Link to={`/feedback/${feedback.id}`}>{feedback.title}</Link>
+      </div>
       <div>{feedback.description}</div>
       <div className="badge badge-info">{feedback.category}</div>
       <div>

@@ -1,35 +1,30 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { initializeFeedbacks } from './reducers/feedbacksReducer'
-import { initializeUser } from './reducers/userReducer'
-import Suggestions from './components/Suggestions'
-import Filter from './components/Filter'
-import Header from './components/Header'
-import RoadmapSummary from './components/RoadmapSummary'
+import { fetchProductRequests } from './features/feedbacks/feedbacksSlice'
+import { fetchCurrentUser } from './features/currentUser/currentUserSlice'
+import { Route, Routes } from 'react-router-dom'
+import Index from './routes/Index'
+import FeedbackNew from './routes/FeedbackNew'
+import FeedbackDetail from './routes/FeedbackDetail'
+import Roadmap from './routes/Roadmap'
+import FeedbackEdit from './routes/FeedbackEdit'
 
 const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(initializeFeedbacks())
-    dispatch(initializeUser())
+    dispatch(fetchProductRequests())
+    dispatch(fetchCurrentUser())
   }, [dispatch])
 
   return (
-    <div className="container mx-auto px-4 max-w-[1110px] flex flex-col md:flex-row gap-[30px]">
-      <div className="sidebar md:max-w-[255px]">
-        <div className="card card-body">
-          <div>Frontend Mentor</div>
-          <div>Feedback Board</div>
-        </div>
-        <Filter />
-        <RoadmapSummary />
-      </div>
-      <div className="w-full">
-        <Header />
-        <Suggestions />
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<Index />} />
+      <Route path="/feedback-new" element={<FeedbackNew />} />
+      <Route path="/feedback/:id" element={<FeedbackDetail />} />
+      <Route path="/feedback/:id/edit" element={<FeedbackEdit />} />
+      <Route path="/roadmap" element={<Roadmap />} />
+    </Routes>
   )
 }
 

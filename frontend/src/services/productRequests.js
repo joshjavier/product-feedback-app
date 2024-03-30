@@ -7,7 +7,7 @@ const getAll = async () => {
   return response.data
 }
 
-const create = async ({ title, category, description }) => {
+const createOne = async ({ title, category, description }) => {
   const newFeedback = {
     title,
     category,
@@ -19,7 +19,13 @@ const create = async ({ title, category, description }) => {
   return response.data
 }
 
+const updateOne = async ({ id, ...changes }) => {
+  const response = await axios.patch(`${baseUrl}/${id}`, changes)
+  return response.data
+}
+
 export default {
   getAll,
-  create,
+  createOne,
+  updateOne,
 }
