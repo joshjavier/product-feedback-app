@@ -32,21 +32,7 @@ export const fetchProductRequests = createAsyncThunk(
 const feedbacksSlice = createSlice({
   initialState,
   name: 'feedbacks',
-  reducers: {
-    set: (state, action) => action.payload,
-    append: (state, action) => {
-      state.push(action.payload)
-    },
-    update: (state, action) => {
-      return state.map(item => item.id === action.payload.id ? action.payload : item)
-    },
-    incrementUpvote: (state, action) => {
-      return state.map(item => item.id === action.payload ? { ...item, upvotes: item.upvotes + 1 } : item)
-    },
-    decrementUpvote: (state, action) => {
-      return state.map(item => item.id === action.payload ? { ...item, upvotes: item.upvotes - 1 } : item)
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchProductRequests.pending, (state) => {
