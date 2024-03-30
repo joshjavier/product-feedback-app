@@ -2,20 +2,13 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createFeedback } from '../features/feedbacks/feedbacksSlice'
+import { categories } from '../data/ui'
 
 const EMPTY = {
   title: '',
   category: 'feature',
   description: '',
 }
-
-const UI = { value: 'ui', label: 'UI' }
-const UX = { value: 'ux', label: 'UX' }
-const ENHANCEMENT = { value: 'enhancement', label: 'Enhancement' }
-const BUG = { value: 'bug', label: 'Bug' }
-const FEATURE = { value: 'feature', label: 'Feature' }
-
-const categories = [FEATURE, UI, UX, ENHANCEMENT, BUG]
 
 const FeedbackNew = () => {
   const [form, setForm] = useState(EMPTY)
