@@ -3,6 +3,7 @@ import {
   createEntityAdapter,
   createSelector,
   createSlice,
+  nanoid,
 } from '@reduxjs/toolkit'
 import { normalize, schema } from 'normalizr'
 import productRequests from '../../services/productRequests'
@@ -62,6 +63,14 @@ const feedbacksSlice = createSlice({
       .addCase(upvoteFeedback.fulfilled, feedbacksAdapter.updateOne)
       .addCase(updateFeedback.fulfilled, feedbacksAdapter.updateOne)
       .addCase(createFeedback.fulfilled, feedbacksAdapter.addOne)
+      .addCase(addComment.fulfilled, (state, action) => {
+        feedbacksAdapter.updateOne(state, {
+          id: action.payload.id,
+          changes: {
+            comments: action.payload.commentIds,
+          },
+        })
+      })
   },
 })
 
@@ -101,6 +110,20 @@ export const upvoteFeedback = createAsyncThunk(
     // await currentUser.update({ upvotedFeedbacks })
 
     return { id, changes: { upvotes } }
+  },
+)
+
+export const addComment = createAsyncThunk(
+  'feedbacks/addComment',
+  async ({ id, content }, { getState }) => {
+    const user = getState().currentUser.username
+    const newComment = { id: nanoid(), content, user }
+    const commentIds = selectFeedbackById(getState(), id).comments.concat(newComment.id)
+
+    // API calls here
+    // await productRequests.updateOne({ id, comments })
+
+    return { id, commentIds, newComment }
   },
 )
 

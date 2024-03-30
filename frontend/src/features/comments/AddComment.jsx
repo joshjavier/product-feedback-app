@@ -1,12 +1,18 @@
 import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addComment } from '../feedbacks/feedbacksSlice'
 
 const AddComment = () => {
+  const { id } = useParams()
+  const dispatch = useDispatch()
   const [content, setContent] = useState('')
   const remaining = 250 - content.length
 
   const onSubmit = (evt) => {
     evt.preventDefault()
-    console.log({ content })
+    dispatch(addComment({ id, content }))
+    setContent('')
   }
 
   return (
