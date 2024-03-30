@@ -60,15 +60,16 @@ const feedbacksSlice = createSlice({
         state.error = action.error.message
       })
       .addCase(upvoteFeedback.fulfilled, feedbacksAdapter.updateOne)
+      .addCase(createFeedback.fulfilled, feedbacksAdapter.addOne)
   },
 })
 
 export const { set, append, update, incrementUpvote, decrementUpvote } = feedbacksSlice.actions
 
-export const createFeedback = feedback => async (dispatch) => {
-  // const newFeedback = await feedbacksService.create(feedback)
-  // dispatch(append(newFeedback))
-}
+export const createFeedback = createAsyncThunk(
+  'feedbacks/createFeedback',
+  productRequests.createOne,
+)
 
 export const upvoteFeedback = createAsyncThunk(
   'feedbacks/upvoteFeedback',

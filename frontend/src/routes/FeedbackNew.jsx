@@ -29,9 +29,10 @@ const FeedbackNew = () => {
     }))
   }
 
-  const onSubmit = (evt) => {
+  const onSubmit = async (evt) => {
     evt.preventDefault()
-    dispatch(createFeedback(form))
+    const { payload } = await dispatch(createFeedback(form))
+    navigate(`/feedback/${payload.id}`)
   }
 
   return (
@@ -94,7 +95,12 @@ const FeedbackNew = () => {
             >
               Cancel
             </button>
-            <button className="btn btn-primary">Add Feedback</button>
+            <button
+              className="btn btn-primary"
+              type="submit"
+            >
+              Add Feedback
+            </button>
           </div>
         </div>
       </form>
