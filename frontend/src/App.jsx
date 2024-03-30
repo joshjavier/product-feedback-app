@@ -7,6 +7,7 @@ import Index from './routes/Index'
 import FeedbackNew from './routes/FeedbackNew'
 import FeedbackDetail from './routes/FeedbackDetail'
 import Roadmap from './routes/Roadmap'
+import FeedbackEdit from './routes/FeedbackEdit'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -21,6 +22,7 @@ const App = () => {
       <Route path="/" element={<Index />} />
       <Route path="/feedback-new" element={<FeedbackNew />} />
       <Route path="/feedback/:id" element={<FeedbackDetail />} />
+      <Route path="/feedback/:id/edit" element={<FeedbackEdit />} />
       <Route path="/roadmap" element={<Roadmap />} />
     </Routes>
   )

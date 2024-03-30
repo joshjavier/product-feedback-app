@@ -5,3 +5,10 @@ export const categories = [
   { value: 'bug', label: 'Bug' },
   { value: 'feature', label: 'Feature' },
 ]
+
+export const status = [
+  { value: 'suggestion', label: 'Suggestion' },
+  { value: 'planned', label: 'Planned' },
+  { value: 'in-progress', label: 'In-Progress' },
+  { value: 'live', label: 'Live' },
+]

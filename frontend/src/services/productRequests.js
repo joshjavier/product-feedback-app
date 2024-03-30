@@ -19,7 +19,13 @@ const createOne = async ({ title, category, description }) => {
   return response.data
 }
 
+const updateOne = async ({ id, ...changes }) => {
+  const response = await axios.patch(`${baseUrl}/${id}`, changes)
+  return response.data
+}
+
 export default {
   getAll,
   createOne,
+  updateOne,
 }

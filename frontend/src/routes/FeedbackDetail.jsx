@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { selectFeedbackById } from '../features/feedbacks/feedbacksSlice'
 import Feedback from '../features/feedbacks/Feedback'
 import AddComment from '../features/comments/AddComment'
@@ -21,7 +21,7 @@ const FeedbackDetail = () => {
         >
           Go Back
         </button>
-        <button className="btn btn-primary">Edit Feedback</button>
+        <Link to="edit" className="btn btn-primary">Edit Feedback</Link>
       </div>
       <Feedback feedback={feedback} />
       <Comments comments={feedback.comments} />
