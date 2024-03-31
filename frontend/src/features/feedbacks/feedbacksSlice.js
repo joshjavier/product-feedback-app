@@ -7,6 +7,7 @@ import {
 } from '@reduxjs/toolkit'
 import { normalize, schema } from 'normalizr'
 import productRequests from '../../services/productRequests'
+import { selectCommentById } from '../comments/commentsSlice'
 
 // Define schemas
 const user = new schema.Entity('users', {}, { idAttribute: 'username' })
@@ -110,6 +111,22 @@ export const addComment = createAsyncThunk(
     // await productRequests.updateOne({ id, comments })
 
     return { id, commentIds, newComment }
+  },
+)
+
+export const addReply = createAsyncThunk(
+  'feedbacks/addReply',
+  async ({ to, content, replyingTo }, { getState }) => {
+    const { upvotedFeedbacks, ...user } = getState().currentUser
+    const comment = selectCommentById(getState(), to)
+    const newReply = { content, replyingTo, user }
+    const replies = comment.replies
+      ? [...comment.replies, newReply]
+      : [newReply]
+
+    // API calls
+
+    return { id: to, changes: { replies } }
   },
 )
 

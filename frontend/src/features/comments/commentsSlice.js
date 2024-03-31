@@ -1,5 +1,5 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
-import { fetchProductRequests, addComment } from '../feedbacks/feedbacksSlice'
+import { fetchProductRequests, addComment, addReply } from '../feedbacks/feedbacksSlice'
 
 const commentsAdapter = createEntityAdapter()
 
@@ -17,6 +17,7 @@ const commentsSlice = createSlice({
       .addCase(addComment.fulfilled, (state, action) => {
         commentsAdapter.addOne(state, action.payload.newComment)
       })
+      .addCase(addReply.fulfilled, commentsAdapter.updateOne)
   },
 })
 
