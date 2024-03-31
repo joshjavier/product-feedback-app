@@ -3,7 +3,7 @@ import { selectSortedFeedbacks } from '../features/feedbacks/feedbacksSlice'
 import SortSelect from '../features/ui/SortSelect'
 import { Link } from 'react-router-dom'
 
-const Header = () => {
+const TopBar = () => {
   const suggestions = useSelector(state => selectSortedFeedbacks(state, 'suggestion'))
 
   return (
@@ -19,4 +19,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default TopBar

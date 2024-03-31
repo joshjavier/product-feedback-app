@@ -1,5 +1,5 @@
 import Filter from '../features/ui/Filter'
-import Header from '../components/Header'
+import TopBar from '../components/TopBar'
 import RoadmapSummary from '../components/RoadmapSummary'
 import Suggestions from '../features/feedbacks/Suggestions'
 
@@ -15,7 +15,7 @@ const Index = () => {
         <RoadmapSummary />
       </header>
       <div className="grow">
-        <Header />
+        <TopBar />
         <Suggestions />
       </div>
     </div>
