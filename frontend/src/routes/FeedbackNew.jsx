@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createFeedback } from '../features/feedbacks/feedbacksSlice'
-import { categories } from '../data/ui'
+import { categories } from '../features/ui'
 
 const EMPTY = {
   title: '',

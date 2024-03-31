@@ -1,14 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { setFilter } from './uiSlice'
+import { categories } from './index'
 
-const ALL = { value: null, label: 'All' }
-const UI = { value: 'ui', label: 'UI' }
-const UX = { value: 'ux', label: 'UX' }
-const ENHANCEMENT = { value: 'enhancement', label: 'Enhancement' }
-const BUG = { value: 'bug', label: 'Bug' }
-const FEATURE = { value: 'feature', label: 'Feature' }
-
-const filters = [ALL, UI, UX, ENHANCEMENT, BUG, FEATURE]
+const filters = [{ value: null, label: 'All' }, ...categories]
 
 const Filter = () => {
   const active = useSelector(state => state.ui.filter)

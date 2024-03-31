@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectFeedbackById, updateFeedback } from '../features/feedbacks/feedbacksSlice'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
-import { categories, status } from '../data/ui'
+import { categories, status } from '../features/ui'
 
 const FeedbackEdit = () => {
   const params = useParams()
