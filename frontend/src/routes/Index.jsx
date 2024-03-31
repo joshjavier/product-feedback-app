@@ -5,15 +5,15 @@ import Suggestions from '../features/feedbacks/Suggestions'
 
 const Index = () => {
   return (
-    <div className="container mx-auto px-4 xl:max-w-[1110px] flex flex-col md:flex-row gap-[30px]">
-      <div className="sidebar md:max-w-[255px] shrink-0">
-        <div className="card card-body">
-          <div>Frontend Mentor</div>
-          <div>Feedback Board</div>
+    <div className="container mx-auto mt-24 px-6 xl:max-w-[1110px] flex flex-col md:flex-row gap-[30px]">
+      <header className="sidebar md:max-w-[255px] shrink-0 space-y-6">
+        <div className="card card-body h-[137px] justify-end gap-0 text-base-heading">
+          <span className="text-xl font-bold tracking-[-0.25px]">Frontend Mentor</span>
+          <h1 className="text-[15px] font-medium">Feedback Board</h1>
         </div>
         <Filter />
         <RoadmapSummary />
-      </div>
+      </header>
       <div className="grow">
         <Header />
         <Suggestions />

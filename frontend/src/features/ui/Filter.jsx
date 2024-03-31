@@ -14,14 +14,14 @@ const Filter = () => {
   }
 
   return (
-    <div className="card card-body">
-      <div className="card-actions">
+    <div className="filter-card card card-body">
+      <div className="card-actions gap-3.5">
         {filters.map(({ value, label }) => (
           <button
             key={value}
             value={value}
             onClick={onClick}
-            className={`btn btn-outline ${value === active ? 'btn-active' : ''}`}
+            className={`btn-filter btn btn-secondary text-[13px] font-semibold ${value === active ? 'btn-active' : ''}`}
           >
             {label}
           </button>

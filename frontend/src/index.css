@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+[data-theme="mytheme"] header {
+  --padding-card: 24px;
+}
+
+[data-theme="mytheme"] .card {
+  background-color: #FFFFFF;
+}
+
+[data-theme="mytheme"] .filter-card {
+  --padding-card: 24px;
+}
+
+[data-theme="mytheme"] .btn-filter {
+  height: 30px;
+  min-height: 30px;
+  padding-inline: 16px;
+}
+
+[data-theme="mytheme"] .btn-filter:not(.btn-active) {
+  background-color: #F2F4FF;
+  border-color: #F2F4FF;
+  color: #4661E6;
+}
+
+[data-theme="mytheme"] .btn-filter:not(.btn-active):hover {
+  background-color: #CFD7FF;
+}
