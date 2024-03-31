@@ -5,6 +5,7 @@ import { selectUserByUsername } from '../users/usersSlice'
 import { useRef, useState } from 'react'
 import AddReply from './AddReply'
 import Replies from './Replies'
+import Avatar from '../../components/Avatar'
 
 const Comment = ({ commentId }) => {
   const comment = useSelector(state => selectCommentById(state, commentId))
@@ -22,10 +23,8 @@ const Comment = ({ commentId }) => {
   }
 
   return (
-    <article className="flex">
-      <div className="w-10 shrink-0">
-        <img className="rounded-full" src={user.image} alt="" />
-      </div>
+    <article className="flex items-start">
+      <Avatar user={user} />
       <div className="grow">
         <div className="flex justify-between align-middle">
           <div>
