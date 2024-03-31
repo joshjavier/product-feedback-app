@@ -14,7 +14,7 @@ const Index = () => {
         <Filter />
         <RoadmapSummary />
       </header>
-      <div className="grow">
+      <div className="grow space-y-6">
         <TopBar />
         <Suggestions />
       </div>
