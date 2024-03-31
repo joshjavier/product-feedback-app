@@ -3,9 +3,11 @@ import {
   createEntityAdapter,
   createSelector,
   createSlice,
+  nanoid,
 } from '@reduxjs/toolkit'
 import { normalize, schema } from 'normalizr'
 import productRequests from '../../services/productRequests'
+import { selectCommentById } from '../comments/commentsSlice'
 
 // Define schemas
 const user = new schema.Entity('users', {}, { idAttribute: 'username' })
@@ -31,21 +33,7 @@ export const fetchProductRequests = createAsyncThunk(
 const feedbacksSlice = createSlice({
   initialState,
   name: 'feedbacks',
-  reducers: {
-    set: (state, action) => action.payload,
-    append: (state, action) => {
-      state.push(action.payload)
-    },
-    update: (state, action) => {
-      return state.map(item => item.id === action.payload.id ? action.payload : item)
-    },
-    incrementUpvote: (state, action) => {
-      return state.map(item => item.id === action.payload ? { ...item, upvotes: item.upvotes + 1 } : item)
-    },
-    decrementUpvote: (state, action) => {
-      return state.map(item => item.id === action.payload ? { ...item, upvotes: item.upvotes - 1 } : item)
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchProductRequests.pending, (state) => {
@@ -62,6 +50,14 @@ const feedbacksSlice = createSlice({
       .addCase(upvoteFeedback.fulfilled, feedbacksAdapter.updateOne)
       .addCase(updateFeedback.fulfilled, feedbacksAdapter.updateOne)
       .addCase(createFeedback.fulfilled, feedbacksAdapter.addOne)
+      .addCase(addComment.fulfilled, (state, action) => {
+        feedbacksAdapter.updateOne(state, {
+          id: action.payload.id,
+          changes: {
+            comments: action.payload.commentIds,
+          },
+        })
+      })
   },
 })
 
@@ -101,6 +97,36 @@ export const upvoteFeedback = createAsyncThunk(
     // await currentUser.update({ upvotedFeedbacks })
 
     return { id, changes: { upvotes } }
+  },
+)
+
+export const addComment = createAsyncThunk(
+  'feedbacks/addComment',
+  async ({ id, content }, { getState }) => {
+    const user = getState().currentUser.username
+    const newComment = { id: nanoid(), content, user }
+    const commentIds = selectFeedbackById(getState(), id).comments.concat(newComment.id)
+
+    // API calls here
+    // await productRequests.updateOne({ id, comments })
+
+    return { id, commentIds, newComment }
+  },
+)
+
+export const addReply = createAsyncThunk(
+  'feedbacks/addReply',
+  async ({ to, content, replyingTo }, { getState }) => {
+    const { upvotedFeedbacks, ...user } = getState().currentUser
+    const comment = selectCommentById(getState(), to)
+    const newReply = { content, replyingTo, user }
+    const replies = comment.replies
+      ? [...comment.replies, newReply]
+      : [newReply]
+
+    // API calls
+
+    return { id: to, changes: { replies } }
   },
 )
 

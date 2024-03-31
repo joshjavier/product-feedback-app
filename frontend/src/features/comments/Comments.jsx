@@ -1,7 +1,12 @@
-import PropTypes from 'prop-types'
+import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectFeedbackById } from '../feedbacks/feedbacksSlice'
 import Comment from './Comment'
 
-const Comments = ({ comments }) => {
+const Comments = () => {
+  const { id } = useParams()
+  const { comments } = useSelector(state => selectFeedbackById(state, id))
+
   return (
     <div className="card card-body">
       <h2 className="card-title">
@@ -20,10 +25,6 @@ const Comments = ({ comments }) => {
       )}
     </div>
   )
-}
-
-Comments.propTypes = {
-  comments: PropTypes.array,
 }
 
 export default Comments
