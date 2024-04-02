@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.26.10",
     "@fontsource-variable/jost": "^5.0.18",
     "@reduxjs/toolkit": "^2.2.2",
     "axios": "^1.6.8",
