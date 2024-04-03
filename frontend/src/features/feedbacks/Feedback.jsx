@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { categories } from '../ui'
 import UpvoteButton from './UpvoteButton'
+import CommentCount from './CommentCount'
 
 const Feedback = ({ feedback }) => {
   return (
@@ -9,7 +10,7 @@ const Feedback = ({ feedback }) => {
       <div className="shrink-0">
         <UpvoteButton id={feedback.id} />
       </div>
-      <div>
+      <div className="grow">
         <h3 className="font-bold text-lg tracking-[-0.25px] text-base-heading mb-1">
           <Link to={`/feedback/${feedback.id}`}>{feedback.title}</Link>
         </h3>
@@ -18,10 +19,8 @@ const Feedback = ({ feedback }) => {
           {categories.find(({ value }) => value === feedback.category).label}
         </div>
       </div>
-      <div>
-        Comments
-        {' '}
-        {feedback.comments?.length || 0}
+      <div className="flex items-center">
+        <CommentCount count={feedback.comments?.length} />
       </div>
     </div>
   )
