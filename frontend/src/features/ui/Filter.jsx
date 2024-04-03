@@ -21,7 +21,7 @@ const Filter = () => {
             key={value}
             value={value}
             onClick={onClick}
-            className={`btn-filter btn btn-secondary text-[13px] font-semibold ${value === active ? 'btn-active' : ''}`}
+            className={`btn btn-secondary ${value === active ? 'btn-active' : ''}`}
           >
             {label}
           </button>

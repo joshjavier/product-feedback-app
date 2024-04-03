@@ -1,40 +1,27 @@
 import PropTypes from 'prop-types'
-import { useDispatch, useSelector } from 'react-redux'
-import { upvoteFeedback } from './feedbacksSlice'
 import { Link } from 'react-router-dom'
+import { categories } from '../ui'
+import UpvoteButton from './UpvoteButton'
 
 const Feedback = ({ feedback }) => {
-  const upvotedFeedbacks = useSelector(state => state.currentUser?.upvotedFeedbacks)
-  const isUpvoted = upvotedFeedbacks?.includes(feedback.id)
-  const dispatch = useDispatch()
-
-  const onClick = () => {
-    dispatch(upvoteFeedback(feedback.id))
-  }
-
   return (
-    <div className="card card-body">
-      <div className="card-title">
-        <Link to={`/feedback/${feedback.id}`}>{feedback.title}</Link>
+    <div className="card px-8 py-7 flex-row gap-x-10">
+      <div className="shrink-0">
+        <UpvoteButton id={feedback.id} />
       </div>
-      <div>{feedback.description}</div>
-      <div className="badge badge-info">{feedback.category}</div>
+      <div>
+        <h3 className="font-bold text-lg tracking-[-0.25px] text-base-heading mb-1">
+          <Link to={`/feedback/${feedback.id}`}>{feedback.title}</Link>
+        </h3>
+        <div>{feedback.description}</div>
+        <div className="btn btn-secondary pointer-events-none mt-3">
+          {categories.find(({ value }) => value === feedback.category).label}
+        </div>
+      </div>
       <div>
         Comments
         {' '}
         {feedback.comments?.length || 0}
-      </div>
-      <div>
-        Upvotes
-        {' '}
-        {feedback.upvotes}
-        {' '}
-        <button
-          onClick={onClick}
-          className={`btn ${isUpvoted ? 'btn-active' : ''}`}
-        >
-          Upvote
-        </button>
       </div>
     </div>
   )

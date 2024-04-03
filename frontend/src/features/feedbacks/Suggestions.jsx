@@ -15,7 +15,7 @@ const Suggestions = () => {
   }
 
   return (
-    <div>
+    <div className="space-y-5">
       {suggestions.map(suggestion => (
         <Feedback key={suggestion.id} feedback={suggestion} />
       ))}

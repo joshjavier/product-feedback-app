@@ -14,18 +14,33 @@
   --padding-card: 24px;
 }
 
-[data-theme="mytheme"] .btn-filter {
+[data-theme="mytheme"] .btn-secondary {
   height: 30px;
   min-height: 30px;
   padding-inline: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  width: fit-content;
 }
 
-[data-theme="mytheme"] .btn-filter:not(.btn-active) {
+[data-theme="mytheme"] .btn-secondary:not(.btn-active) {
   background-color: #F2F4FF;
   border-color: #F2F4FF;
   color: #4661E6;
 }
 
-[data-theme="mytheme"] .btn-filter:not(.btn-active):hover {
+[data-theme="mytheme"] .btn-secondary:not(.btn-active):hover {
   background-color: #CFD7FF;
+  border-color: #CFD7FF;
+}
+
+[data-theme="mytheme"] .btn-upvote {
+  width: 40px;
+  height: 53px;
+  padding: 0;
+  font-weight: 700;
+}
+
+[data-theme="mytheme"] .btn-upvote:not(.btn-active) span {
+  color: #3A4374;
 }
