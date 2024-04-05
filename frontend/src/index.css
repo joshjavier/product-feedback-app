@@ -14,6 +14,27 @@
   --padding-card: 24px;
 }
 
+[data-theme="mytheme"] .btn {
+  height: 44px;
+  min-height: 44px;
+}
+
+[data-theme="mytheme"] .btn-neutral {
+  background-color: #3A4374;
+  border-color: #3A4374;
+  color: #F2F4FF;
+}
+
+[data-theme="mytheme"] .btn-neutral:hover {
+  background-color: #656EA3;
+  border-color: #656EA3;
+}
+
+[data-theme="mytheme"] .btn-primary:hover {
+  background-color: #C75AF6;
+  border-color: #C75AF6;
+}
+
 [data-theme="mytheme"] .btn-secondary {
   height: 30px;
   min-height: 30px;
@@ -45,8 +66,13 @@
   color: #3A4374;
 }
 
+[data-theme="mytheme"] form .input,
+[data-theme="mytheme"] form .textarea,
 [data-theme="mytheme"] form .select {
   --rounded-btn: 5px;
+}
+
+[data-theme="mytheme"] form .select {
   background-image: none;
   align-items: center;
   justify-content: space-between;
@@ -54,6 +80,9 @@
   font-size: 15px;
 }
 
-[data-theme="mytheme"] form :not(.btn):focus {
+[data-theme="mytheme"] form .input:focus,
+[data-theme="mytheme"] form .textarea:focus,
+[data-theme="mytheme"] form .select:focus {
   border-color: #4661E6;
+  outline: none;
 }

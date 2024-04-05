@@ -47,8 +47,8 @@ const FeedbackNew = () => {
 
           <div className="space-y-6">
             <div className="form-control">
-              <label className="font-bold mb-0.5" htmlFor="title">Feedback Title</label>
-              <p id="title-description" className="mb-4">Add a short, descriptive headline</p>
+              <label className="font-bold mb-0.5 tracking-[-0.19px]" htmlFor="title">Feedback Title</label>
+              <p id="title-description" className="mb-4 text-base-content">Add a short, descriptive headline</p>
               <input
                 type="text"
                 className="input"
@@ -60,8 +60,8 @@ const FeedbackNew = () => {
               />
             </div>
             <div className="form-control">
-              <label className="font-bold mb-0.5" htmlFor="category">Category</label>
-              <p id="category-description" className="mb-4">Choose a category for your feedback</p>
+              <label className="font-bold mb-0.5 tracking-[-0.19px]" htmlFor="category">Category</label>
+              <p id="category-description" className="mb-4 text-base-content">Choose a category for your feedback</p>
               <Select name="category" updateField={handleUpdateField}>
                 {categories.map(({ label, value }) => (
                   <Option key={value} label={label} value={value} />
@@ -69,10 +69,10 @@ const FeedbackNew = () => {
               </Select>
             </div>
             <div className="form-control">
-              <label className="label" htmlFor="detail">Feedback Detail</label>
-              <p id="detail-description">Include any specific comments on what should be improved, added, etc.</p>
+              <label className="font-bold mb-0.5 tracking-[-0.19px]" htmlFor="detail">Feedback Detail</label>
+              <p id="detail-description" className="mb-4 text-base-content">Include any specific comments on what should be improved, added, etc.</p>
               <textarea
-                className="textarea textarea-bordered"
+                className="textarea h-24 resize-none"
                 aria-describedby="detail-description"
                 id="detail"
                 name="description"
@@ -82,16 +82,16 @@ const FeedbackNew = () => {
             </div>
           </div>
 
-          <div className="flex justify-end gap-4">
+          <div className="flex justify-end gap-4 mt-8">
             <button
               type="button"
-              className="btn"
+              className="btn btn-neutral font-bold w-[93px]"
               onClick={() => navigate(-1)}
             >
               Cancel
             </button>
             <button
-              className="btn btn-primary"
+              className="btn btn-primary font-bold w-36"
               type="submit"
             >
               Add Feedback
