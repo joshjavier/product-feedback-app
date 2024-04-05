@@ -1,9 +1,9 @@
 export const categories = [
+  { value: 'feature', label: 'Feature' },
   { value: 'ui', label: 'UI' },
   { value: 'ux', label: 'UX' },
   { value: 'enhancement', label: 'Enhancement' },
   { value: 'bug', label: 'Bug' },
-  { value: 'feature', label: 'Feature' },
 ]
 
 export const status = [

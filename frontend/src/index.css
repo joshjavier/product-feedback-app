@@ -44,3 +44,16 @@
 [data-theme="mytheme"] .btn-upvote:not(.btn-active) span {
   color: #3A4374;
 }
+
+[data-theme="mytheme"] form .select {
+  --rounded-btn: 5px;
+  background-image: none;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 24px;
+  font-size: 15px;
+}
+
+[data-theme="mytheme"] form :not(.btn):focus {
+  border-color: #4661E6;
+}
