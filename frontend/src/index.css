@@ -70,6 +70,13 @@
 [data-theme="mytheme"] form .textarea,
 [data-theme="mytheme"] form .select {
   --rounded-btn: 5px;
+  font-size: 15px;
+  line-height: normal;
+}
+
+[data-theme="mytheme"] form .textarea {
+  padding-block: 16px;
+  padding-inline: 24px;
 }
 
 [data-theme="mytheme"] form .select {
