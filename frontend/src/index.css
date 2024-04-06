@@ -55,6 +55,11 @@
   border-color: #CFD7FF;
 }
 
+[data-theme="mytheme"] .btn-error:hover {
+  background-color: #E98888;
+  border-color: #E98888;
+}
+
 [data-theme="mytheme"] .btn-upvote {
   width: 40px;
   height: 53px;

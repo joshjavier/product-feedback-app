@@ -32,6 +32,8 @@ export default {
           'neutral': '#373F68',
           'base-100': '#F7F8FD',
           'base-content': '#647196',
+          'error': '#D73737',
+          'error-content': '#F2F4FF',
 
           '--rounded-btn': '10px',
           '--rounded-box': '10px',
