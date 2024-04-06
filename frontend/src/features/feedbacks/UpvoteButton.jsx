@@ -13,7 +13,7 @@ const UpvoteButton = ({ id, direction = 'col' }) => {
     dispatch(upvoteFeedback(id))
   }
 
-  const col = direction === 'col' ? 'flex-col' : ''
+  const col = direction === 'col' ? 'flex-col w-10 h-[53px] min-h-[53px]' : 'w-[69px] h-10 min-h-10'
   const active = isUpvoted ? 'btn-active' : ''
 
   return (

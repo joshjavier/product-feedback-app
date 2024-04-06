@@ -143,6 +143,11 @@ export const selectFeedbacksByStatus = createSelector(
   (feedbacks, status) => feedbacks.filter(feedback => feedback.status === status),
 )
 
+export const selectFeedbackIdsByStatus = createSelector(
+  [selectFeedbacksByStatus],
+  feedbacks => feedbacks.map(feedback => feedback.id),
+)
+
 export const selectFilteredFeedbacks = createSelector(
   [selectFeedbacksByStatus, state => state.ui.filter],
   (feedbacks, category) => {

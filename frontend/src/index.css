@@ -2,98 +2,102 @@
 @tailwind components;
 @tailwind utilities;
 
-[data-theme="mytheme"] header {
-  --padding-card: 24px;
-}
+@layer components {
+  [data-theme="mytheme"] header {
+    --padding-card: 24px;
+  }
 
-[data-theme="mytheme"] .filter-card {
-  --padding-card: 24px;
-}
+  [data-theme="mytheme"] .filter-card {
+    --padding-card: 24px;
+  }
 
-[data-theme="mytheme"] .btn {
-  height: 44px;
-  min-height: 44px;
-}
+  [data-theme="mytheme"] .feedback-card {
+    --rounded-box: 5px;
+  }
 
-[data-theme="mytheme"] .btn-neutral {
-  background-color: #3A4374;
-  border-color: #3A4374;
-  color: #F2F4FF;
-}
+  .btn {
+    height: 44px;
+    min-height: 44px;
+  }
 
-[data-theme="mytheme"] .btn-neutral:hover {
-  background-color: #656EA3;
-  border-color: #656EA3;
-}
+  [data-theme="mytheme"] .btn-neutral {
+    background-color: #3A4374;
+    border-color: #3A4374;
+    color: #F2F4FF;
+  }
 
-[data-theme="mytheme"] .btn-primary:hover {
-  background-color: #C75AF6;
-  border-color: #C75AF6;
-}
+  [data-theme="mytheme"] .btn-neutral:hover {
+    background-color: #656EA3;
+    border-color: #656EA3;
+  }
 
-[data-theme="mytheme"] .btn-secondary.btn-sm {
-  height: 30px;
-  min-height: 30px;
-  padding-inline: 16px;
-  font-size: 13px;
-}
+  [data-theme="mytheme"] .btn-primary:hover {
+    background-color: #C75AF6;
+    border-color: #C75AF6;
+  }
 
-[data-theme="mytheme"] .btn-secondary.btn-active:hover {
-  background-color: #7C91F9;
-  border-color: #7C91F9;
-}
+  [data-theme="mytheme"] .btn-secondary.btn-sm {
+    height: 30px;
+    min-height: 30px;
+    padding-inline: 16px;
+    font-size: 13px;
+  }
 
-[data-theme="mytheme"] .btn-secondary:not(.btn-active) {
-  background-color: #F2F4FF;
-  border-color: #F2F4FF;
-  color: #4661E6;
-}
+  [data-theme="mytheme"] .btn-secondary.btn-active:hover {
+    background-color: #7C91F9;
+    border-color: #7C91F9;
+  }
 
-[data-theme="mytheme"] .btn-secondary:not(.btn-active):hover {
-  background-color: #CFD7FF;
-  border-color: #CFD7FF;
-}
+  [data-theme="mytheme"] .btn-secondary:not(.btn-active) {
+    background-color: #F2F4FF;
+    border-color: #F2F4FF;
+    color: #4661E6;
+  }
 
-[data-theme="mytheme"] .btn-error:hover {
-  background-color: #E98888;
-  border-color: #E98888;
-}
+  [data-theme="mytheme"] .btn-secondary:not(.btn-active):hover {
+    background-color: #CFD7FF;
+    border-color: #CFD7FF;
+  }
 
-[data-theme="mytheme"] .btn-upvote {
-  width: 40px;
-  height: 53px;
-  padding: 0;
-  font-weight: 700;
-}
+  [data-theme="mytheme"] .btn-error:hover {
+    background-color: #E98888;
+    border-color: #E98888;
+  }
 
-[data-theme="mytheme"] .btn-upvote:not(.btn-active) span {
-  color: #3A4374;
-}
+  [data-theme="mytheme"] .btn-upvote {
+    padding: 0;
+    font-weight: 700;
+  }
 
-[data-theme="mytheme"] form .input,
-[data-theme="mytheme"] form .textarea,
-[data-theme="mytheme"] form .select {
-  --rounded-btn: 5px;
-  font-size: 15px;
-  line-height: normal;
-}
+  [data-theme="mytheme"] .btn-upvote:not(.btn-active) span {
+    color: #3A4374;
+  }
 
-[data-theme="mytheme"] form .textarea {
-  padding-block: 16px;
-  padding-inline: 24px;
-}
+  [data-theme="mytheme"] form .input,
+  [data-theme="mytheme"] form .textarea,
+  [data-theme="mytheme"] form .select {
+    --rounded-btn: 5px;
+    font-size: 15px;
+    line-height: normal;
+  }
 
-[data-theme="mytheme"] form .select {
-  background-image: none;
-  align-items: center;
-  justify-content: space-between;
-  padding-inline: 24px;
-  font-size: 15px;
-}
+  [data-theme="mytheme"] form .textarea {
+    padding-block: 16px;
+    padding-inline: 24px;
+  }
 
-[data-theme="mytheme"] form .input:focus,
-[data-theme="mytheme"] form .textarea:focus,
-[data-theme="mytheme"] form .select:focus {
-  border-color: #4661E6;
-  outline: none;
+  [data-theme="mytheme"] form .select {
+    background-image: none;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 24px;
+    font-size: 15px;
+  }
+
+  [data-theme="mytheme"] form .input:focus,
+  [data-theme="mytheme"] form .textarea:focus,
+  [data-theme="mytheme"] form .select:focus {
+    border-color: #4661E6;
+    outline: none;
+  }
 }

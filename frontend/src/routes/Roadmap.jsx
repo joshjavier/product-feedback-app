@@ -1,24 +1,20 @@
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Board from '../features/feedbacks/Board'
+import BackButton from '../components/BackButton'
 
 const Roadmap = () => {
-  const navigate = useNavigate()
-
   return (
-    <main className="container mx-auto xl:max-w-[1110px]">
-      <div className="card card-body flex-row justify-between items-center">
+    <main className="container mx-auto mt-[78px] mb-[179px] xl:max-w-[1110px]">
+      <div className="card bg-neutral text-white mb-12 py-[27px] ps-8 pe-10 flex-row justify-between items-center">
         <div>
-          <button
-            className="btn btn-ghost"
-            onClick={() => navigate(-1)}
-          >
-            Go Back
-          </button>
-          <h1 className="card-title">Roadmap</h1>
+          <BackButton theme="dark" />
+          <h1 className="font-bold text-2xl tracking-[-0.33px]">Roadmap</h1>
         </div>
-        <button className="btn btn-primary">Add Feedback</button>
+        <Link to="/feedback-new" className="btn btn-primary font-bold w-[158px]">
+          <span aria-hidden="true">+</span> Add Feedback
+        </Link>
       </div>
-      <div className="grid lg:grid-cols-3">
+      <div className="grid lg:grid-cols-3 gap-x-[30px]">
         <Board
           status="planned"
           title="Planned"
