@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createFeedback } from '../features/feedbacks/feedbacksSlice'
 import { categories } from '../features/ui'
-import LeftArrowIcon from '../assets/shared/icon-arrow-left.svg?react'
+import BackButton from '../components/BackButton'
 import Select from '../components/Select'
 import Option from '../components/Option'
 
@@ -34,13 +34,9 @@ const FeedbackNew = () => {
 
   return (
     <div className="mx-auto mt-[92px] px-6 box-content max-w-[540px]">
-      <button
-        onClick={() => navigate(-1)}
-        className="link link-hover text-sm font-bold flex items-center gap-x-4 mb-10"
-      >
-        <LeftArrowIcon className="fill-none stroke-secondary" />
-        <span>Go Back</span>
-      </button>
+      <div className="mb-10">
+        <BackButton />
+      </div>
       <form onSubmit={onSubmit}>
         <div className="card pt-[52px] px-[42px] pb-10 text-base-heading text-sm">
           <h1 className="font-bold text-2xl tracking-[-0.33px] mb-10">Create New Feedback</h1>

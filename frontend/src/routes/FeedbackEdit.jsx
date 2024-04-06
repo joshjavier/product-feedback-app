@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { categories, status } from '../features/ui'
 import Form from '../components/Form'
 import Field from '../components/Field'
-import LeftArrowIcon from '../assets/shared/icon-arrow-left.svg?react'
+import BackButton from '../components/BackButton'
 
 const FeedbackEdit = () => {
   const params = useParams()
@@ -20,13 +20,9 @@ const FeedbackEdit = () => {
 
   return (
     <div className="mx-auto mt-[92px] px-6 box-content max-w-[540px]">
-      <button
-        onClick={() => navigate(-1)}
-        className="link link-hover text-sm font-bold flex items-center gap-x-4 mb-10"
-      >
-        <LeftArrowIcon className="fill-none stroke-secondary" />
-        <span>Go Back</span>
-      </button>
+      <div className="mb-10">
+        <BackButton />
+      </div>
       <div className="card pt-[52px] px-[42px] pb-10 text-base-heading text-sm">
         <h1 className="font-bold text-2xl tracking-[-0.33px] mb-[75px]">Editing &lsquo;{feedback.title}&rsquo;</h1>
         <Form onSubmit={onSubmit} initialData={feedback} submitLabel="Save Changes">

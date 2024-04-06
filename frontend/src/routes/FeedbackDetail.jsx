@@ -4,6 +4,7 @@ import { selectFeedbackById } from '../features/feedbacks/feedbacksSlice'
 import Feedback from '../features/feedbacks/Feedback'
 import AddComment from '../features/comments/AddComment'
 import Comments from '../features/comments/Comments'
+import BackButton from '../components/BackButton'
 
 const FeedbackDetail = () => {
   const navigate = useNavigate()
@@ -15,12 +16,7 @@ const FeedbackDetail = () => {
   return (
     <div className="container px-4 md:max-w-[730px] mx-auto">
       <div className="flex justify-between">
-        <button
-          onClick={() => navigate(-1)}
-          className="btn btn-ghost"
-        >
-          Go Back
-        </button>
+        <BackButton />
         <Link to="edit" className="btn btn-primary">Edit Feedback</Link>
       </div>
       <Feedback feedback={feedback} />
