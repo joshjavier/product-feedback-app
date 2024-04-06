@@ -26,12 +26,12 @@ export const useSelectContext = () => {
   return value
 }
 
-const Select = ({ children, name, updateField }) => {
+const Select = ({ children, name, initialIndex, updateField }) => {
   const labelsRef = useRef([])
   const elementsRef = useRef([])
   const [isOpen, setOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(null)
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [selectedIndex, setSelectedIndex] = useState(initialIndex > 0 ? initialIndex : 0)
   const [selectedLabel, setSelectedLabel] = useState(null)
 
   const { refs, floatingStyles, context, elements, update } = useFloating({
@@ -110,6 +110,7 @@ const Select = ({ children, name, updateField }) => {
     <>
       <button
         type="button"
+        id={name}
         ref={refs.setReference}
         className={`select ${isOpen ? 'border-secondary' : ''}`}
         {...getReferenceProps()}
@@ -147,6 +148,7 @@ Select.propTypes = {
     PropTypes.node,
   ]).isRequired,
   name: PropTypes.string,
+  initialIndex: PropTypes.number,
   updateField: PropTypes.func,
 }
 
