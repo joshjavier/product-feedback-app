@@ -6,7 +6,7 @@ import CommentCount from './CommentCount'
 
 const Feedback = ({ feedback }) => {
   return (
-    <div className="card px-8 py-7 flex-row gap-x-10">
+    <div className="card bg-white px-8 py-7 flex-row gap-x-10">
       <div className="shrink-0">
         <UpvoteButton id={feedback.id} />
       </div>

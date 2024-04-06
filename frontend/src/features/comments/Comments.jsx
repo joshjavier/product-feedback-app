@@ -8,7 +8,7 @@ const Comments = () => {
   const { comments } = useSelector(state => selectFeedbackById(state, id))
 
   return (
-    <div className="card pt-6 px-8 pb-12">
+    <div className="card bg-white pt-6 px-8 pb-12">
       <h2 className="mb-7 px-0.5 font-bold text-lg tracking-[-0.25px] text-base-heading">
         {comments?.length || 0}
         {' '}

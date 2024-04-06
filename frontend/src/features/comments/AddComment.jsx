@@ -17,7 +17,7 @@ const AddComment = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="card pt-6 ps-[34px] pe-8 pb-8">
+      <div className="card bg-white pt-6 ps-[34px] pe-8 pb-8">
         <h2 className="mb-6 font-bold text-lg tracking-[-0.25px] text-base-heading">Add Comment</h2>
         <textarea
           className="textarea resize-none h-20 text-base-heading"

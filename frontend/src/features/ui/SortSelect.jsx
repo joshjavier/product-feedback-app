@@ -85,7 +85,7 @@ const SortSelect = () => {
           <FloatingFocusManager context={context} modal={false}>
             <div
               ref={refs.setFloating}
-              className="card divide-y w-[255px] shadow-xl"
+              className="card bg-white divide-y w-[255px] shadow-xl"
               style={floatingStyles}
               {...getFloatingProps()}
             >

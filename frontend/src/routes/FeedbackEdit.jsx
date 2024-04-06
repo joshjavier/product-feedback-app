@@ -23,7 +23,7 @@ const FeedbackEdit = () => {
       <div className="mb-10">
         <BackButton />
       </div>
-      <div className="card pt-[52px] px-[42px] pb-10 text-base-heading text-sm">
+      <div className="card bg-white pt-[52px] px-[42px] pb-10 text-base-heading text-sm">
         <h1 className="font-bold text-2xl tracking-[-0.33px] mb-[75px]">Editing &lsquo;{feedback.title}&rsquo;</h1>
         <Form onSubmit={onSubmit} initialData={feedback} submitLabel="Save Changes">
           <Field

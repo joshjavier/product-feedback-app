@@ -14,7 +14,7 @@ const Filter = () => {
   }
 
   return (
-    <div className="filter-card card card-body">
+    <div className="filter-card card bg-white card-body">
       <div className="card-actions gap-3.5">
         {filters.map(({ value, label }) => (
           <button

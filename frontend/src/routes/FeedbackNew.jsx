@@ -38,7 +38,7 @@ const FeedbackNew = () => {
         <BackButton />
       </div>
       <form onSubmit={onSubmit}>
-        <div className="card pt-[52px] px-[42px] pb-10 text-base-heading text-sm">
+        <div className="card bg-white pt-[52px] px-[42px] pb-10 text-base-heading text-sm">
           <h1 className="font-bold text-2xl tracking-[-0.33px] mb-10">Create New Feedback</h1>
 
           <div className="space-y-6">

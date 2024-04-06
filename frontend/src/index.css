@@ -6,10 +6,6 @@
   --padding-card: 24px;
 }
 
-[data-theme="mytheme"] .card {
-  background-color: #FFFFFF;
-}
-
 [data-theme="mytheme"] .filter-card {
   --padding-card: 24px;
 }

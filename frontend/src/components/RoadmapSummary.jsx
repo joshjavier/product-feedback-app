@@ -31,7 +31,7 @@ const RoadmapSummary = () => {
   if (Object.keys(count).length === 0) return
 
   return (
-    <div className="card card-body p-6 pt-[19px]">
+    <div className="card bg-white card-body p-6 pt-[19px]">
       <div className="flex justify-between items-center">
         <h2 className="card-title font-bold text-lg tracking-[-0.25px] text-base-heading">Roadmap</h2>
         <Link to="/roadmap" className="link link-secondary font-semibold text-[13px]">View</Link>
