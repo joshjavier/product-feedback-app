@@ -17,7 +17,7 @@ const FeedbackDetail = () => {
     <div className="container mx-auto mt-20 mb-[137px] md:max-w-[730px] space-y-6">
       <div className="flex items-center justify-between">
         <BackButton />
-        <Link to="edit" className="btn btn-primary w-[142px]">Edit Feedback</Link>
+        <Link to="edit" className="btn btn-secondary btn-active w-[142px]">Edit Feedback</Link>
       </div>
       <Feedback feedback={feedback} />
       <Comments />

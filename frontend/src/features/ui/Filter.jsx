@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setFilter } from './uiSlice'
 import { categories } from './index'
 
-const filters = [{ value: null, label: 'All' }, ...categories]
+const filters = [{ value: null, label: 'All' }, ...categories.slice(1), categories[0]]
 
 const Filter = () => {
   const active = useSelector(state => state.ui.filter)
@@ -21,7 +21,7 @@ const Filter = () => {
             key={value}
             value={value}
             onClick={onClick}
-            className={`btn btn-secondary ${value === active ? 'btn-active' : ''}`}
+            className={`btn btn-secondary btn-sm ${value === active ? 'btn-active' : ''}`}
           >
             {label}
           </button>

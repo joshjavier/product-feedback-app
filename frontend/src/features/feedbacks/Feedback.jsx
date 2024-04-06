@@ -15,7 +15,7 @@ const Feedback = ({ feedback }) => {
           <Link to={`/feedback/${feedback.id}`}>{feedback.title}</Link>
         </h3>
         <div>{feedback.description}</div>
-        <div className="btn btn-secondary pointer-events-none mt-3">
+        <div className="btn btn-secondary btn-sm pointer-events-none mt-3">
           {categories.find(({ value }) => value === feedback.category).label}
         </div>
       </div>

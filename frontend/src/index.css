@@ -35,13 +35,16 @@
   border-color: #C75AF6;
 }
 
-[data-theme="mytheme"] .btn-secondary {
+[data-theme="mytheme"] .btn-secondary.btn-sm {
   height: 30px;
   min-height: 30px;
   padding-inline: 16px;
   font-size: 13px;
-  font-weight: 600;
-  width: fit-content;
+}
+
+[data-theme="mytheme"] .btn-secondary.btn-active:hover {
+  background-color: #7C91F9;
+  border-color: #7C91F9;
 }
 
 [data-theme="mytheme"] .btn-secondary:not(.btn-active) {
