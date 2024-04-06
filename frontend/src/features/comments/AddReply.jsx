@@ -22,12 +22,12 @@ const AddReply = ({ to, close, replyingTo }) => {
     <form onSubmit={onSubmit}>
       <div className="flex gap-4">
         <textarea
-          className="textarea textarea-bordered grow"
+          className="textarea h-20 resize-none grow text-base-heading"
           ref={ref}
           value={content}
           onChange={e => setContent(e.target.value)}
         />
-        <button className="btn btn-primary" type="submit">Post Reply</button>
+        <button className="btn btn-primary w-[117px]" type="submit">Post Reply</button>
       </div>
     </form>
   )

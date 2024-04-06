@@ -24,21 +24,23 @@ const Comment = ({ commentId }) => {
 
   return (
     <article className="flex items-start">
-      <Avatar user={user} />
+      <div className="me-8">
+        <Avatar user={user} />
+      </div>
       <div className="grow">
-        <div className="flex justify-between align-middle">
-          <div>
-            <h3 className="font-bold">{user.name}</h3>
+        <div className="flex justify-between items-center mb-[17px]">
+          <div className="text-sm">
+            <h3 className="font-bold tracking-[-0.19px] text-base-heading">{user.name}</h3>
             <p>{user.username}</p>
           </div>
           <button
-            className="btn btn-ghost"
+            className="link link-hover link-secondary font-semibold text-[13px]"
             onClick={handleReplyTo(user.username)}
           >
             Reply
           </button>
         </div>
-        <div>
+        <div className="text-[15px]">
           <p>{comment.content}</p>
         </div>
         {comment.replies && (
@@ -48,11 +50,13 @@ const Comment = ({ commentId }) => {
           />
         )}
         {isReplying && (
-          <AddReply
-            to={commentId}
-            close={() => setReplying(false)}
-            replyingTo={replyingTo.current}
-          />
+          <div className={`mt-6 ${comment.replies ? 'ms-[45px]' : ''}`}>
+            <AddReply
+              to={commentId}
+              close={() => setReplying(false)}
+              replyingTo={replyingTo.current}
+            />
+          </div>
         )}
       </div>
     </article>

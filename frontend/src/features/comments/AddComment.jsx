@@ -17,17 +17,17 @@ const AddComment = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="card card-body">
-        <h2 className="card-title">Add Comment</h2>
+      <div className="card pt-6 ps-[34px] pe-8 pb-8">
+        <h2 className="mb-6 font-bold text-lg tracking-[-0.25px] text-base-heading">Add Comment</h2>
         <textarea
-          className="textarea textarea-bordered"
+          className="textarea resize-none h-20 text-base-heading"
           maxLength={250}
           value={content}
           onChange={e => setContent(e.target.value)}
         />
-        <div className="flex justify-between items-center">
-          <span>{remaining} {remaining === 1 ? 'character' : 'characters'} left</span>
-          <button type="submit" className="btn btn-primary">Post Comment</button>
+        <div className="flex justify-between items-center mt-4">
+          <span className="text-[15px]">{remaining} {remaining === 1 ? 'character' : 'characters'} left</span>
+          <button type="submit" className="btn btn-primary w-[142px] font-bold">Post Comment</button>
         </div>
       </div>
     </form>
