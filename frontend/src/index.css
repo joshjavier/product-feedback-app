@@ -3,8 +3,25 @@
 @tailwind utilities;
 
 @layer components {
-  [data-theme="mytheme"] header {
+  [data-theme="mytheme"] header .content {
     --padding-card: 24px;
+  }
+
+  [data-theme="mytheme"] .header .content {
+    background-image: url('/assets/suggestions/mobile/background-header.png');
+    background-size: cover;
+  }
+
+  @media (min-width: 768px) {
+    [data-theme="mytheme"] .header .content {
+      background-image: url('/assets/suggestions/tablet/background-header.png');
+    }
+  }
+
+  @media (min-width: 1024px) {
+    [data-theme="mytheme"] .header .content {
+      background-image: url('/assets/suggestions/desktop/background-header.png');
+    }
   }
 
   [data-theme="mytheme"] .filter-card {

@@ -6,7 +6,7 @@ const SuggestionCount = () => {
   const suggestions = useSelector(state => selectSortedFeedbacks(state, 'suggestion'))
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="items-center gap-4 hidden sm:flex">
       <BulbIcon className="fill-current" />
       <span className="font-bold text-lg tracking-[-0.25px]">
         {suggestions.length}&nbsp;{suggestions.length === 1 ? 'Suggestion' : 'Suggestions'}
