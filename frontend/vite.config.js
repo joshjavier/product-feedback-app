@@ -12,9 +12,14 @@ export default defineConfig({
         svgoConfig: {
           plugins: [
             {
-              name: 'removeAttrs',
+              name: 'removeAttributesBySelector',
               params: {
-                attrs: '(fill|stroke)',
+                selectors: [
+                  {
+                    selector: '[stroke=#4661E6]',
+                    attributes: ['fill', 'stroke'],
+                  },
+                ],
               },
             },
           ],

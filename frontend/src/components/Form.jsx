@@ -36,7 +36,7 @@ const Form = ({ children, onSubmit, initialData, submitLabel = 'Submit' }) => {
         <div className="space-y-6">
           {children}
         </div>
-        <div className="flex flex-col sm:flex-row gap-4 mt-8">
+        <div className="flex flex-col sm:flex-row gap-4 mt-10 sm:mt-8">
           <button
             className="btn btn-primary font-bold sm:order-last w-full sm:w-36"
             type="submit"

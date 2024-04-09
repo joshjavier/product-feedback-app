@@ -35,7 +35,7 @@ const Option = ({ label, value }) => {
         },
       })}
     >
-      <span>{label}</span>
+      <span className="text-sm sm:text-base">{label}</span>
       {isSelected && <CheckIcon className="fill-none stroke-primary" />}
     </div>
   )

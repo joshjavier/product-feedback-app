@@ -127,7 +127,7 @@ const Select = ({ children, name, initialIndex, updateField }) => {
           <FloatingFocusManager context={context} modal={false}>
             <div
               ref={refs.setFloating}
-              className={`card divide-y shadow-xl ${isOpen ? '' : 'hidden'}`}
+              className={`card bg-white divide-y shadow-xl ${isOpen ? '' : 'hidden'}`}
               style={floatingStyles}
               {...getFloatingProps()}
             >

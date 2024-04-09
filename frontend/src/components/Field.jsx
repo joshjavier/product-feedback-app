@@ -56,7 +56,7 @@ const Field = ({ type = 'text', name, label, description, items }) => {
     <div className="form-control">
       <label
         htmlFor={name}
-        className="font-bold mb-0.5 tracking-[-0.19px]"
+        className="font-bold mb-0.5 tracking-[-0.19px] text-base-heading"
       >
         {label}
       </label>

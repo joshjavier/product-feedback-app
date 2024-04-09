@@ -33,8 +33,17 @@
   }
 
   .btn {
-    height: 44px;
-    min-height: 44px;
+    height: 40px;
+    min-height: 40px;
+    font-size: 13px;
+  }
+
+  @media (min-width: 640px) {
+    .btn {
+      height: 44px;
+      min-height: 44px;
+      font-size: 14px;
+    }
   }
 
   [data-theme="mytheme"] .btn-neutral {
@@ -94,8 +103,21 @@
   [data-theme="mytheme"] form .textarea,
   [data-theme="mytheme"] form .select {
     --rounded-btn: 5px;
-    font-size: 15px;
+    font-size: 13px;
     line-height: normal;
+    color: #3A4374;
+  }
+
+  @media (min-width: 640px) {
+    [data-theme="mytheme"] form .input,
+    [data-theme="mytheme"] form .textarea,
+    [data-theme="mytheme"] form .select {
+      font-size: 15px;
+    }
+  }
+
+  [data-theme="mytheme"] form .input {
+    padding-inline: 24px;
   }
 
   [data-theme="mytheme"] form .textarea {
@@ -108,7 +130,6 @@
     align-items: center;
     justify-content: space-between;
     padding-inline: 24px;
-    font-size: 15px;
   }
 
   [data-theme="mytheme"] form .input:focus,

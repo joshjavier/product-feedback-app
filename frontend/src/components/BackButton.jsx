@@ -9,7 +9,7 @@ const BackButton = ({ theme = 'light' }) => {
   return (
     <button
       onClick={() => navigate(-1)}
-      className="link link-hover text-sm font-bold flex items-center gap-x-4"
+      className="link link-hover font-bold flex items-center gap-x-4"
     >
       <LeftArrowIcon className={`fill-none ${darkMode ? 'stroke-[#CDD2EE]' : 'stroke-secondary'}`} />
       <span>Go Back</span>

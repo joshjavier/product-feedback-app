@@ -1,11 +1,11 @@
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createFeedback } from '../features/feedbacks/feedbacksSlice'
 import { categories } from '../features/ui'
 import BackButton from '../components/BackButton'
-import Select from '../components/Select'
-import Option from '../components/Option'
+import Form from '../components/Form'
+import Field from '../components/Field'
+import NewFeedbackIcon from '../assets/shared/icon-new-feedback.svg?react'
 
 const EMPTY = {
   title: '',
@@ -14,87 +14,43 @@ const EMPTY = {
 }
 
 const FeedbackNew = () => {
-  const [form, setForm] = useState(EMPTY)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const handleUpdateField = (name, value) => {
-    setForm(state => ({ ...state, [name]: value }))
-  }
-
-  const onChange = (evt) => {
-    handleUpdateField(evt.target.name, evt.target.value)
-  }
-
-  const onSubmit = async (evt) => {
-    evt.preventDefault()
+  const onSubmit = async (form) => {
     const { payload } = await dispatch(createFeedback(form))
     navigate(`/feedback/${payload.id}`)
   }
 
   return (
-    <div className="mx-auto mt-[92px] px-6 box-content max-w-[540px]">
-      <div className="mb-10">
+    <div className="mx-auto mt-[34px] sm:mt-14 md:mt-[92px] px-6 box-content max-w-[540px] text-[13px] sm:text-sm">
+      <div className="mb-[55px] sm:mb-[68px]">
         <BackButton />
       </div>
-      <form onSubmit={onSubmit}>
-        <div className="card bg-white pt-[52px] px-[42px] pb-10 text-base-heading text-sm">
-          <h1 className="font-bold text-2xl tracking-[-0.33px] mb-10">Create New Feedback</h1>
-
-          <div className="space-y-6">
-            <div className="form-control">
-              <label className="font-bold mb-0.5 tracking-[-0.19px]" htmlFor="title">Feedback Title</label>
-              <p id="title-description" className="mb-4 text-base-content">Add a short, descriptive headline</p>
-              <input
-                type="text"
-                className="input"
-                aria-describedby="title-description"
-                id="title"
-                name="title"
-                value={form.title}
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-control">
-              <label className="font-bold mb-0.5 tracking-[-0.19px]" htmlFor="category">Category</label>
-              <p id="category-description" className="mb-4 text-base-content">Choose a category for your feedback</p>
-              <Select name="category" updateField={handleUpdateField}>
-                {categories.map(({ label, value }) => (
-                  <Option key={value} label={label} value={value} />
-                ))}
-              </Select>
-            </div>
-            <div className="form-control">
-              <label className="font-bold mb-0.5 tracking-[-0.19px]" htmlFor="detail">Feedback Detail</label>
-              <p id="detail-description" className="mb-4 text-base-content">Include any specific comments on what should be improved, added, etc.</p>
-              <textarea
-                className="textarea h-24 resize-none"
-                aria-describedby="detail-description"
-                id="detail"
-                name="description"
-                value={form.description}
-                onChange={onChange}
-              />
-            </div>
-          </div>
-
-          <div className="flex justify-end gap-4 mt-8">
-            <button
-              type="button"
-              className="btn btn-neutral font-bold w-[93px]"
-              onClick={() => navigate(-1)}
-            >
-              Cancel
-            </button>
-            <button
-              className="btn btn-primary font-bold w-36"
-              type="submit"
-            >
-              Add Feedback
-            </button>
-          </div>
-        </div>
-      </form>
+      <div className="card bg-white p-6 pt-11 sm:px-[42px] sm:pt-[52px] sm:pb-10">
+        <NewFeedbackIcon viewBox="0 0 56 56" className="absolute inset-0 translate-y-[-50%] ms-6 sm:ms-[42px] w-10 sm:w-14" />
+        <h1 className="font-bold text-lg sm:text-2xl text-base-heading tracking-[-0.33px] mb-10">Create New Feedback</h1>
+        <Form onSubmit={onSubmit} initialData={EMPTY} submitLabel="Add Feedback">
+          <Field
+            name="title"
+            label="Feedback Title"
+            description="Add a short, descriptive headline"
+          />
+          <Field
+            type="select"
+            name="category"
+            label="Category"
+            description="Choose a category for your feedback"
+            items={categories}
+          />
+          <Field
+            type="textarea"
+            name="description"
+            label="Feedback Detail"
+            description="Include any specific comments on what should be improved, added, etc."
+          />
+        </Form>
+      </div>
     </div>
   )
 }
