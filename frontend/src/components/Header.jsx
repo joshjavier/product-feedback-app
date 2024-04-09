@@ -10,15 +10,18 @@ import {
   FloatingPortal,
   FloatingOverlay,
 } from '@floating-ui/react'
+import Filter from '../features/ui/Filter'
+import RoadmapSummary from './RoadmapSummary'
 
 const Toggle = ({ open, onToggle }) => {
   return (
     <button
       onClick={onToggle}
-      className={`btn btn-ghost rounded-full w-11 p-0 swap swap-rotate md:hidden ${open ? 'swap-active' : ''}`}
+      className={`btn btn-ghost rounded-full w-11 p-0 me-[-12px] swap swap-rotate md:hidden ${open ? 'swap-active' : ''}`}
     >
-      <CloseIcon className="swap-on fill-current" />
-      <HamburgerIcon className="swap-off fill-current" />
+      <CloseIcon aria-hidden className="swap-on fill-current" />
+      <HamburgerIcon aria-hidden className="swap-off fill-current" />
+      <span className="sr-only">{open ? 'Close menu' : 'Open menu'}</span>
     </button>
   )
 }
@@ -63,11 +66,12 @@ const Header = () => {
             />
             <div
               ref={refs.setFloating}
-              className="side bg-white w-[271px] h-screen"
+              className="side bg-base-100 w-[271px] h-screen p-6 space-y-6"
               style={floatingStyles}
               {...getFloatingProps()}
             >
-              {/* Sidebar content here */}
+              <Filter />
+              <RoadmapSummary />
             </div>
           </FloatingFocusManager>
         </FloatingPortal>
