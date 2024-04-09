@@ -37,6 +37,22 @@ const Form = ({ children, onSubmit, initialData, submitLabel = 'Submit' }) => {
           {children}
         </div>
         <div className="flex flex-col sm:flex-row gap-4 mt-10 sm:mt-8">
+          {canDelete && (
+            <button
+              type="button"
+              className="max-sm:hidden btn btn-error font-bold w-[93px] me-auto"
+              onClick={() => navigate(-1)}
+            >
+              Delete
+            </button>
+          )}
+          <button
+            type="button"
+            className="max-sm:hidden btn btn-neutral font-bold w-[93px]"
+            onClick={() => navigate(-1)}
+          >
+            Cancel
+          </button>
           <button
             className="btn btn-primary font-bold sm:order-last w-full sm:w-36"
             type="submit"
@@ -45,7 +61,7 @@ const Form = ({ children, onSubmit, initialData, submitLabel = 'Submit' }) => {
           </button>
           <button
             type="button"
-            className="btn btn-neutral font-bold w-full sm:w-[93px] sm:ms-auto"
+            className="sm:hidden btn btn-neutral font-bold w-full"
             onClick={() => navigate(-1)}
           >
             Cancel
@@ -53,7 +69,7 @@ const Form = ({ children, onSubmit, initialData, submitLabel = 'Submit' }) => {
           {canDelete && (
             <button
               type="button"
-              className="btn btn-error font-bold w-full sm:w-[93px] sm:order-first"
+              className="sm:hidden btn btn-error font-bold w-full"
               onClick={() => navigate(-1)}
             >
               Delete
