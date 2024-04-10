@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectFeedbackById, upvoteFeedback } from './feedbacksSlice'
-import UpArrowIcon from '../../assets/shared/icon-arrow-up.svg?react'
+import { selectFeedbackById, upvoteFeedback } from '../feedbacksSlice'
+import UpArrowIcon from '../../../assets/shared/icon-arrow-up.svg?react'
+import './style.css'
 
-const UpvoteButton = ({ id, direction = 'col' }) => {
+const UpvoteButton = ({ id }) => {
   const dispatch = useDispatch()
   const { upvotes } = useSelector(state => selectFeedbackById(state, id))
   const upvotedFeedbacks = useSelector(state => state.currentUser?.upvotedFeedbacks)
@@ -13,24 +14,23 @@ const UpvoteButton = ({ id, direction = 'col' }) => {
     dispatch(upvoteFeedback(id))
   }
 
-  const col = direction === 'col' ? 'flex-col w-10 h-[53px] min-h-[53px]' : 'w-[69px] h-10 min-h-10'
   const active = isUpvoted ? 'btn-active' : ''
 
   return (
     <button
       onClick={onClick}
-      className={`btn btn-secondary btn-upvote ${col} ${active}`}
+      className={`btn btn-secondary btn-upvote ${active}`}
       title={`${upvotes} upvotes`}
     >
-      <UpArrowIcon className="fill-none stroke-current" />
+      <UpArrowIcon aria-hidden className="fill-none stroke-current" />
       <span>{upvotes}</span>
+      <span className="sr-only"> {upvotes === 1 ? 'upvote' : 'upvotes'}</span>
     </button>
   )
 }
 
 UpvoteButton.propTypes = {
   id: PropTypes.string.isRequired,
-  direction: PropTypes.string,
 }
 
 export default UpvoteButton

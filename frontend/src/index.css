@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer components {
+  .card {
+    container: card / inline-size;
+  }
+
   [data-theme="mytheme"] header .content {
     --padding-card: 24px;
   }
@@ -88,15 +92,6 @@
   [data-theme="mytheme"] .btn-error:hover {
     background-color: #E98888;
     border-color: #E98888;
-  }
-
-  [data-theme="mytheme"] .btn-upvote {
-    padding: 0;
-    font-weight: 700;
-  }
-
-  [data-theme="mytheme"] .btn-upvote:not(.btn-active) span {
-    color: #3A4374;
   }
 
   [data-theme="mytheme"] form .input,

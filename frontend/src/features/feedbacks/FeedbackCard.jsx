@@ -30,7 +30,7 @@ const FeedbackCard = ({ id }) => {
         {categories.find(({ value }) => value === feedback.category).label}
       </div>
       <div className="flex mt-4 justify-between items-center">
-        <UpvoteButton id={id} direction="row" />
+        <UpvoteButton id={id} />
         <CommentCount count={feedback.comments?.length} />
       </div>
     </div>

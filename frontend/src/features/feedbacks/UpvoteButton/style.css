@@ -1,0 +1,20 @@
+.btn-upvote {
+  padding: 0;
+  width: 69px;
+  height: 100%;
+  min-height: 32px;
+  font-weight: 700;
+}
+
+.btn-upvote:not(.btn-active) span {
+  color: theme(colors.base-heading);
+}
+
+@container card (min-width: 30rem) {
+  .btn-upvote {
+    flex-direction: column;
+    height: 53px;
+    width: 100%;
+    min-width: 40px;
+  }
+}
