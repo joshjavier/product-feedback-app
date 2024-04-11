@@ -1,0 +1,80 @@
+.feedback {
+  padding-inline: 20px;
+  padding-block: 24px;
+  font-size: 13px;
+  display: grid;
+  grid-template-columns: 40px 1fr min-content;
+  grid-template-rows: 1fr 32px;
+  justify-items: start;
+  row-gap: 16px;
+  column-gap: 40px;
+}
+
+.feedback > * {
+  grid-column: 1 / -1;
+}
+
+.feedback > :nth-child(2),
+.feedback > :nth-child(3) {
+  grid-row: 2;
+}
+
+.feedback > :nth-child(3) {
+  grid-column: -2;
+}
+
+.feedback-title {
+  font-weight: 700;
+  letter-spacing: -0.18px;
+  color: theme(colors.base-heading);
+}
+
+.feedback-description {
+  margin-block: 11px 22px;
+}
+
+@container card (min-width: 320px) {
+  .feedback {
+    padding: 24px;
+  }
+
+  .feedback-description {
+    margin-block: 9px 8px;
+  }
+}
+
+@container card (min-width: 350px) {
+  .feedback {
+    font-size: 16px;
+    padding: 32px;
+  }
+
+  .feedback-title {
+    font-size: 18px;
+    letter-spacing: -0.25px;
+  }
+
+  .feedback-description {
+    margin-block: 4px 16px;
+  }
+}
+
+@container card (min-width: 30rem) {
+  .feedback {
+    padding: 28px 32px;
+  }
+
+  .feedback > :nth-child(1) {
+    grid-row: 1 / -1;
+    grid-column: 2;
+  }
+
+  .feedback > :nth-child(2),
+  .feedback > :nth-child(3) {
+    grid-row: 1 / -1;
+  }
+
+  .feedback > :nth-child(2) {
+    grid-column: 1;
+  }
+}

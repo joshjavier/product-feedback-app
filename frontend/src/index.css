@@ -32,7 +32,7 @@
     --padding-card: 24px;
   }
 
-  [data-theme="mytheme"] .feedback-card {
+  [data-theme="mytheme"] .feedback {
     --rounded-box: 5px;
   }
 
