@@ -1,17 +1,28 @@
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectFeedbackById } from '../feedbacksSlice'
 import { categories } from '../../ui'
 import UpvoteButton from '../UpvoteButton'
 import CommentCount from '../CommentCount'
 import './style.css'
 
-const Feedback = ({ feedback }) => {
+const Feedback = ({ id }) => {
+  const params = useParams()
+  const feedback = useSelector(state => selectFeedbackById(state, id || params.id))
+
+  if (!feedback) return
+
   return (
     <div className="card bg-white">
       <div className="feedback">
         <div className="feedback-text">
           <h3 className="feedback-title">
-            <Link to={`/feedback/${feedback.id}`}>{feedback.title}</Link>
+            {id ? (
+              <Link to={`/feedback/${feedback.id}`}>{feedback.title}</Link>
+            ) : (
+              feedback.title
+            )}
           </h3>
           <p className="feedback-description">{feedback.description}</p>
           <div className="feedback-category btn btn-secondary btn-sm pointer-events-none">
@@ -26,14 +37,7 @@ const Feedback = ({ feedback }) => {
 }
 
 Feedback.propTypes = {
-  feedback: PropTypes.shape({
-    id: PropTypes.string,
-    title: PropTypes.string,
-    category: PropTypes.string,
-    upvotes: PropTypes.number,
-    description: PropTypes.string,
-    comments: PropTypes.array,
-  }).isRequired,
+  id: PropTypes.string,
 }
 
 export default Feedback
