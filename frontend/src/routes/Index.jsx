@@ -12,7 +12,7 @@ const Index = () => {
 
   return (
     <div className={`md:container mx-auto xl:max-w-[1110px] ${flex} ${gap} ${spacing}`}>
-      <div className={`lg:w-[255px] ${grid} gap-x-2.5 gap-y-6 flex-none`}>
+      <div className={`lg:w-[255px] ${grid} gap-x-2.5 gap-y-6 flex-none max-md:sticky top-0 z-10`}>
         <Header />
         <div className="max-md:hidden">
           <Filter />

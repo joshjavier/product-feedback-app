@@ -44,7 +44,7 @@ const Header = () => {
   const overlayOffset = refs.reference.current?.getBoundingClientRect().height
 
   return (
-    <div className="header max-md:sticky top-0 z-10">
+    <div className="header">
       <div
         ref={refs.setReference}
         className="content bg-primary text-white py-4 px-6 flex justify-between md:card md:h-full lg:h-[137px]"
