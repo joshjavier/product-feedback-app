@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { selectFeedbackIdsByStatus } from './feedbacksSlice'
-import FeedbackCard from './FeedbackCard'
+import Feedback from './Feedback'
 
 const Board = ({ status, title, description }) => {
   const feedbackIds = useSelector(state => selectFeedbackIdsByStatus(state, status))
@@ -13,7 +13,7 @@ const Board = ({ status, title, description }) => {
       <ul className="mt-8 space-y-6">
         {feedbackIds.map(id => (
           <li key={id}>
-            <FeedbackCard id={id} />
+            <Feedback id={id} />
           </li>
         ))}
       </ul>

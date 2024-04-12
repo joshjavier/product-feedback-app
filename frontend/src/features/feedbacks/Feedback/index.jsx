@@ -5,7 +5,14 @@ import { selectFeedbackById } from '../feedbacksSlice'
 import { categories } from '../../ui'
 import UpvoteButton from '../UpvoteButton'
 import CommentCount from '../CommentCount'
+import StatusBadge from '../../../components/StatusBadge'
 import './style.css'
+
+const colorVariants = {
+  'planned': 'bg-accent',
+  'in-progress': 'bg-primary',
+  'live': 'bg-info',
+}
 
 const Feedback = ({ id }) => {
   const params = useParams()
@@ -17,6 +24,12 @@ const Feedback = ({ id }) => {
     <div className="card bg-white">
       <div className="feedback">
         <div className="feedback-text">
+          {feedback.status !== 'suggestion' && (
+            <div className="feedback-status">
+              <div className={`absolute inset-0 h-1.5 rounded-t-[5px] ${colorVariants[feedback.status]}`}></div>
+              <StatusBadge status={feedback.status} />
+            </div>
+          )}
           <h3 className="feedback-title">
             {id ? (
               <Link to={`/feedback/${feedback.id}`}>{feedback.title}</Link>
