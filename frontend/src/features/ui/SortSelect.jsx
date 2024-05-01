@@ -68,16 +68,19 @@ const SortSelect = () => {
   return (
     <>
       <button
-        className="flex items-center gap-[9px] text-primary-content"
+        className="flex flex-wrap items-center gap-x-[9px] text-primary-content"
         ref={refs.setReference}
         {...getReferenceProps()}
       >
-        Sort by : <strong>{options[selectedIndex].label}</strong>
-        {isOpen ? (
-          <UpArrowIcon className={arrowIcon} />
-        ) : (
-          <DownArrowIcon className={arrowIcon} />
-        )}
+        Sort by :
+        <span className="flex items-center gap-x-[9px]">
+          <strong>{options[selectedIndex].label}</strong>
+          {isOpen ? (
+            <UpArrowIcon className={arrowIcon} />
+          ) : (
+            <DownArrowIcon className={arrowIcon} />
+          )}
+        </span>
       </button>
 
       {isOpen && (

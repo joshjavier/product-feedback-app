@@ -5,11 +5,12 @@ import Comment from './Comment'
 
 const Comments = () => {
   const { id } = useParams()
-  const { comments } = useSelector(state => selectFeedbackById(state, id))
+  const feedback = useSelector(state => selectFeedbackById(state, id))
+  const comments = feedback?.comments || []
 
   return (
-    <div className="card bg-white pt-6 px-8 pb-12">
-      <h2 className="mb-7 px-0.5 font-bold text-lg tracking-[-0.25px] text-base-heading">
+    <div className="card bg-white pt-6 px-6 sm:px-8 pb-12">
+      <h2 className="mb-6 sm:mb-7 px-0.5 font-bold text-lg tracking-[-0.25px] text-base-heading">
         {comments?.length || 0}
         {' '}
         {comments?.length === 1 ? 'Comment' : 'Comments'}

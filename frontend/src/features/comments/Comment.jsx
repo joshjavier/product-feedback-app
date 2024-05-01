@@ -29,7 +29,7 @@ const Comment = ({ commentId }) => {
       </div>
       <div className="grow">
         <div className="flex justify-between items-center mb-[17px]">
-          <div className="text-sm">
+          <div>
             <h3 className="font-bold tracking-[-0.19px] text-base-heading">{user.name}</h3>
             <p>{user.username}</p>
           </div>
@@ -40,7 +40,7 @@ const Comment = ({ commentId }) => {
             Reply
           </button>
         </div>
-        <div className="text-[15px]">
+        <div className="md:text-[15px]">
           <p>{comment.content}</p>
         </div>
         {comment.replies && (
