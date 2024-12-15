@@ -7,6 +7,7 @@ import logger from 'morgan';
 import dbConnect from './db-connect';
 import indexRouter from './routes';
 import usersRouter from './routes/users';
+import feedbacksRouter from './routes/feedbacks';
 import errorHandler from './middlewares/error-handler';
 
 dbConnect()
@@ -21,7 +22,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
-app.use('/users', usersRouter);
+app.use('/api/feedbacks', feedbacksRouter);
 
 app.use(errorHandler);
 
