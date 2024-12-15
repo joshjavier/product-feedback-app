@@ -7,6 +7,7 @@
 import app from '../app';
 import debug from 'debug';
 import http from 'node:http';
+import { express } from '../config';
 
 debug('server:server');
 
@@ -14,7 +15,7 @@ debug('server:server');
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(express.port);
 app.set('port', port);
 
 /**
