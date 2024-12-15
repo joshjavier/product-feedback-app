@@ -1,6 +1,7 @@
 import express from 'express'
 import { HydratedDocument } from 'mongoose'
 import Feedback, { IFeedback } from '../models/feedback'
+import commentsRouter from './comments'
 
 const router = express.Router()
 
@@ -33,5 +34,7 @@ router.get('/:id', async (req, res) => {
     res.status(404).json({ error: 'Feedback not found' })
   }
 })
+
+router.use('/:id/comments', commentsRouter)
 
 export default router
