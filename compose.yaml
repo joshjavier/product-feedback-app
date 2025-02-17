@@ -4,7 +4,7 @@ services:
     image: mongo:8.0.4
     restart: always
     environment:
-      MONGO_INITDB_DATABASE: product_feedback
+      MONGO_INITDB_DATABASE: product-feedback
     ports:
       - 27017:27017
     volumes:

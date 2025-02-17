@@ -1,66 +1,4 @@
-db.users.insertMany([
-  {
-    avatar: "./assets/user-images/image-zena.jpg",
-    name: "Zena Kelley",
-    username: "velvetround",
-  },
-  {
-    avatar: "./assets/user-images/image-suzanne.jpg",
-    name: "Suzanne Chang",
-    username: "upbeat1811",
-  },
-  {
-    avatar: "./assets/user-images/image-thomas.jpg",
-    name: "Thomas Hood",
-    username: "brawnybrave",
-  },
-  {
-    avatar: "./assets/user-images/image-elijah.jpg",
-    name: "Elijah Moss",
-    username: "hexagon.bestagon",
-  },
-  {
-    avatar: "./assets/user-images/image-james.jpg",
-    name: "James Skinner",
-    username: "hummingbird1",
-  },
-  {
-    avatar: "./assets/user-images/image-anne.jpg",
-    name: "Anne Valentine",
-    username: "annev1990",
-  },
-  {
-    avatar: "./assets/user-images/image-ryan.jpg",
-    name: "Ryan Welles",
-    username: "voyager.344",
-  },
-  {
-    avatar: "./assets/user-images/image-george.jpg",
-    name: "George Partridge",
-    username: "soccerviewer8",
-  },
-  {
-    avatar: "./assets/user-images/image-javier.jpg",
-    name: "Javier Pollard",
-    username: "warlikeduke",
-  },
-  {
-    avatar: "./assets/user-images/image-roxanne.jpg",
-    name: "Roxanne Travis",
-    username: "peppersprime32",
-  },
-  {
-    avatar: "./assets/user-images/image-victoria.jpg",
-    name: "Victoria Mejia",
-    username: "arlen_the_marlin",
-  },
-  {
-    avatar: "./assets/user-images/image-jackson.jpg",
-    name: "Jackson Barker",
-    username: "countryspirit",
-  },
-]);
-
+// Insert seed data
 db.requests.insertMany([
   {
     title: "Add tags for solutions",
@@ -355,6 +293,32 @@ db.requests.insertMany([
   },
 ]);
 
+// Extract users into a separate collection
+db.requests.aggregate([
+  { $unwind: "$comments" },
+  { $replaceWith: "$comments.user" },
+  {
+    $unionWith: {
+      coll: "requests",
+      pipeline: [
+        { $unwind: "$comments" },
+        { $unwind: "$comments.replies" },
+        { $replaceWith: "$comments.replies.user" },
+      ],
+    },
+  },
+  {
+    $group: {
+      _id: "$username",
+      username: { $first: "$username" },
+      name: { $first: "$name" },
+      avatar: { $first: "$image" },
+    },
+  },
+  { $unset: "_id" },
+  { $merge: "users" },
+]);
+
 // Extract comments into a separate collection
 db.requests.aggregate([
   { $unwind: "$comments" },
@@ -418,4 +382,67 @@ db.comments.aggregate([
   },
   { $set: { replies: { $map: { input: "$replies", in: "$$this._id" } } } },
   { $merge: "comments" },
+]);
+
+// Embed three most recent comments to the requests collection
+db.requests.aggregate([
+  { $match: { comments: { $ne: null } } },
+  {
+    $lookup: {
+      from: "comments",
+      localField: "_id",
+      foreignField: "requestId",
+      as: "comments",
+      pipeline: [
+        { $match: { parentId: null } },
+        { $limit: 3 },
+        {
+          $lookup: {
+            from: "comments",
+            localField: "replies",
+            foreignField: "_id",
+            as: "replies",
+            pipeline: [
+              { $limit: 3 },
+              {
+                $lookup: {
+                  from: "users",
+                  localField: "userId",
+                  foreignField: "_id",
+                  as: "user",
+                  pipeline: [{ $unset: ["_id"] }],
+                },
+              },
+              { $unwind: "$user" },
+              { $unset: ["requestId", "parentId", "userId"] },
+            ],
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "userId",
+            foreignField: "_id",
+            as: "user",
+            pipeline: [{ $unset: "_id" }],
+          },
+        },
+        { $unwind: "$user" },
+        {
+          $project: {
+            content: 1,
+            user: 1,
+            replies: {
+              $cond: {
+                if: { $eq: [0, { $size: "$replies" }] },
+                then: "$$REMOVE",
+                else: "$replies",
+              },
+            },
+          },
+        },
+      ],
+    },
+  },
+  { $merge: "requests" },
 ]);
