@@ -316,8 +316,20 @@ db.requests.aggregate([
     },
   },
   { $unset: "_id" },
+  // Set user passwords to "supersecret"
+  {
+    $set: {
+      password: {
+        $literal:
+          "$2a$10$TIH4Q1KJedCRjLc33yVojeINFM8CdyuIF/b5IkMIlWFxoAP.WOJIu",
+      },
+    },
+  },
   { $merge: "users" },
 ]);
+
+// Create a unique index on the `username` field of the `users` collection
+db.users.createIndex({ username: 1 }, { unique: true });
 
 // Extract comments into a separate collection
 db.requests.aggregate([
