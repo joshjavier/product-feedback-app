@@ -33,11 +33,11 @@ export const request = (app: Application) => {
   // Initialize hooks
   app.service(requestPath).hooks({
     around: {
-      all: [
-        authenticate('jwt'),
-        schemaHooks.resolveExternal(requestExternalResolver),
-        schemaHooks.resolveResult(requestResolver)
-      ]
+      all: [schemaHooks.resolveExternal(requestExternalResolver), schemaHooks.resolveResult(requestResolver)],
+      create: [authenticate('jwt')],
+      update: [authenticate('jwt')],
+      patch: [authenticate('jwt')],
+      remove: [authenticate('jwt')]
     },
     before: {
       all: [schemaHooks.validateQuery(requestQueryValidator), schemaHooks.resolveQuery(requestQueryResolver)],
