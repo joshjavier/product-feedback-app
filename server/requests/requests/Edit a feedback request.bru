@@ -1,0 +1,25 @@
+meta {
+  name: Edit a feedback request
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{host}}/requests/:requestId
+  body: json
+  auth: bearer
+}
+
+params:path {
+  requestId: {{requestId}}
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
+
+body:json {
+  {
+    "description": "Users should be able to browse and upvote requests, as well as post comments, even when they're offline. When they reconnect to the internet, the app state should sync automatically."
+  }
+}

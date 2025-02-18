@@ -1,0 +1,15 @@
+{
+  "version": "1",
+  "name": "product-feedback",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ],
+  "size": 0.0008411407470703125,
+  "filesCount": 4,
+  "presets": {
+    "requestType": "http",
+    "requestUrl": "{{host}}"
+  }
+}

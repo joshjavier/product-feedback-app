@@ -1,0 +1,27 @@
+meta {
+  name: Create a feedback request
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{host}}/requests
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
+
+body:json {
+  {
+    "title": "Offline mode",
+    "category": "feature",
+    "description": "Users should be able to browse and upvote requests even when they're offline, and then have the app state sync when they reconnect to the internet."
+  }
+}
+
+vars:post-response {
+  requestId: res.body._id
+}

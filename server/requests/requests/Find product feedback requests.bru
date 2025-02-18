@@ -1,0 +1,15 @@
+meta {
+  name: Find product feedback requests
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{host}}/requests
+  body: none
+  auth: none
+}
+
+vars:post-response {
+  requestId: res.body.data[0]._id
+}

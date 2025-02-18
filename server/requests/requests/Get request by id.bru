@@ -1,0 +1,15 @@
+meta {
+  name: Get request by id
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{host}}/requests/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: {{requestId}}
+}

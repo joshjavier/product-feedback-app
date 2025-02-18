@@ -1,0 +1,19 @@
+meta {
+  name: Find user by username
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{host}}/users?username=brunomars
+  body: none
+  auth: bearer
+}
+
+params:query {
+  username: brunomars
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
