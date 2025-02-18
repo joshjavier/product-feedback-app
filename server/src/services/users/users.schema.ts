@@ -15,7 +15,7 @@ export const userSchema = Type.Object(
     _id: ObjectIdSchema(),
     username: Type.String(),
     password: Type.Optional(Type.String()),
-    githubId: Type.Optional(Type.String()),
+    githubId: Type.Optional(Type.Number()),
     avatar: Type.Optional(Type.String())
   },
   { $id: 'User', additionalProperties: false }

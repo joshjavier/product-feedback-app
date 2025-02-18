@@ -32,8 +32,8 @@
     },
     "oauth": {
       "github": {
-        "key": "<Client ID>",
-        "secret": "<Client secret>"
+        "key": "Ov23litAO433Rl2xEs82",
+        "secret": "ec8474f82516958fff037286d176398ee0aec90e"
       }
     }
   }
