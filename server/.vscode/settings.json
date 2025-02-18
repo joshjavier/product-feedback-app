@@ -2,5 +2,5 @@
   "mochaExplorer.files": "test/**/*.ts",
   "mochaExplorer.require": "ts-node/register",
   "mochaExplorer.exit": true,
-  "mochaExplorer.cwd": "server"
+  "mochaExplorer.env": { "NODE_ENV": "test" }
 }

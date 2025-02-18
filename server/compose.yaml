@@ -1,6 +1,6 @@
 services:
   db:
-    container_name: product-feedback-db
+    container_name: sandbox-db
     image: mongo:8.0.4
     restart: always
     environment:
