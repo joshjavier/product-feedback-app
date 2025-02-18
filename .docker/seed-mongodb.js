@@ -396,7 +396,7 @@ db.comments.aggregate([
   { $merge: "comments" },
 ]);
 
-// Embed three most recent comments to the requests collection
+// Compute the total number of comments for each request
 db.requests.aggregate([
   { $match: { comments: { $ne: null } } },
   {
@@ -405,6 +405,7 @@ db.requests.aggregate([
       localField: "_id",
       foreignField: "requestId",
       as: "comments",
+      /*
       pipeline: [
         { $match: { parentId: null } },
         { $limit: 3 },
@@ -454,7 +455,10 @@ db.requests.aggregate([
           },
         },
       ],
+      */
     },
   },
-  { $merge: "requests" },
+  { $set: { totalComments: { $size: "$comments" } } },
+  { $unset: "comments" },
+  { $merge: { into: "requests", whenMatched: "replace" } },
 ]);
