@@ -4,6 +4,9 @@ import type { TransportConnection, Application } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
 import type { AuthenticationClientOptions } from '@feathersjs/authentication-client'
 
+import { commentClient } from './services/comments/comments.shared'
+export type { Comment, CommentData, CommentQuery, CommentPatch } from './services/comments/comments.shared'
+
 import { requestClient } from './services/requests/requests.shared'
 export type { Request, RequestData, RequestQuery, RequestPatch } from './services/requests/requests.shared'
 
@@ -38,5 +41,6 @@ export const createClient = <Configuration = any,>(
 
   client.configure(userClient)
   client.configure(requestClient)
+  client.configure(commentClient)
   return client
 }
