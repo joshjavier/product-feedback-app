@@ -21,6 +21,8 @@ import { logRuntime } from '../../hooks/log-runtime'
 import { resolveCommentTree } from '../../hooks/resolve-comment-tree'
 import { incrementCommentCount } from '../../hooks/increment-comment-count'
 import { decrementCommentCount } from '../../hooks/decrement-comment-count'
+import { pushReplyToParent } from '../../hooks/push-reply-to-parent'
+import { pullReplyFromParent } from '../../hooks/pull-reply-from-parent'
 
 export * from './comments.class'
 export * from './comments.schema'
@@ -57,8 +59,8 @@ export const comment = (app: Application) => {
     },
     after: {
       all: [],
-      create: [incrementCommentCount],
-      remove: [decrementCommentCount]
+      create: [incrementCommentCount, pushReplyToParent],
+      remove: [decrementCommentCount, pullReplyFromParent]
     },
     error: {
       all: []
