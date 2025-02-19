@@ -4,6 +4,9 @@ import type { TransportConnection, Application } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
 import type { AuthenticationClientOptions } from '@feathersjs/authentication-client'
 
+import { voteClient } from './services/votes/votes.shared'
+export type { Vote, VoteData, VoteQuery, VotePatch } from './services/votes/votes.shared'
+
 import { commentClient } from './services/comments/comments.shared'
 export type { Comment, CommentData, CommentQuery, CommentPatch } from './services/comments/comments.shared'
 
@@ -42,5 +45,6 @@ export const createClient = <Configuration = any,>(
   client.configure(userClient)
   client.configure(requestClient)
   client.configure(commentClient)
+  client.configure(voteClient)
   return client
 }

@@ -1,3 +1,4 @@
+import { vote } from './votes/votes'
 import { comment } from './comments/comments'
 import { request } from './requests/requests'
 import { user } from './users/users'
@@ -5,6 +6,7 @@ import { user } from './users/users'
 import type { Application } from '../declarations'
 
 export const services = (app: Application) => {
+  app.configure(vote)
   app.configure(comment)
   app.configure(request)
   app.configure(user)
