@@ -17,6 +17,7 @@ import {
 import type { Application } from '../../declarations'
 import { UserService, getOptions } from './users.class'
 import { userPath, userMethods } from './users.shared'
+import { logRuntime } from '../../hooks/log-runtime'
 
 export * from './users.class'
 export * from './users.schema'
@@ -33,7 +34,11 @@ export const user = (app: Application) => {
   // Initialize hooks
   app.service(userPath).hooks({
     around: {
-      all: [schemaHooks.resolveExternal(userExternalResolver), schemaHooks.resolveResult(userResolver)],
+      all: [
+        logRuntime,
+        schemaHooks.resolveExternal(userExternalResolver),
+        schemaHooks.resolveResult(userResolver)
+      ],
       find: [authenticate('jwt')],
       get: [authenticate('jwt')],
       create: [],

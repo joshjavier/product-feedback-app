@@ -17,6 +17,8 @@ import {
 import type { Application } from '../../declarations'
 import { CommentService, getOptions } from './comments.class'
 import { commentPath, commentMethods } from './comments.shared'
+import { logRuntime } from '../../hooks/log-runtime'
+import { resolveCommentTree } from '../../hooks/resolve-comment-tree'
 
 export * from './comments.class'
 export * from './comments.schema'
@@ -34,13 +36,21 @@ export const comment = (app: Application) => {
   app.service(commentPath).hooks({
     around: {
       all: [
-        authenticate('jwt'),
+        logRuntime,
         schemaHooks.resolveExternal(commentExternalResolver),
         schemaHooks.resolveResult(commentResolver)
-      ]
+      ],
+      create: [authenticate('jwt')],
+      update: [authenticate('jwt')],
+      patch: [authenticate('jwt')],
+      remove: [authenticate('jwt')]
     },
     before: {
-      all: [schemaHooks.validateQuery(commentQueryValidator), schemaHooks.resolveQuery(commentQueryResolver)],
+      all: [
+        schemaHooks.validateQuery(commentQueryValidator),
+        schemaHooks.resolveQuery(commentQueryResolver),
+        resolveCommentTree
+      ],
       find: [],
       get: [],
       create: [schemaHooks.validateData(commentDataValidator), schemaHooks.resolveData(commentDataResolver)],

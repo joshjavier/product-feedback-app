@@ -1,0 +1,15 @@
+meta {
+  name: Find all comments of a request
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{host}}/requests/:requestId/comments
+  body: none
+  auth: none
+}
+
+params:path {
+  requestId: 67b4f3ebfbc4293cbce9496b
+}
