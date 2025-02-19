@@ -65,7 +65,7 @@ export const requestQuerySchema = Type.Intersect(
   [
     querySyntax(requestQueryProperties),
     // Add additional query properties here
-    Type.Object({}, { additionalProperties: false })
+    Type.Object({ countByStatus: Type.Optional(Type.Any()) }, { additionalProperties: false })
   ],
   { additionalProperties: false }
 )

@@ -4,7 +4,7 @@ import { MongoDBService } from '@feathersjs/mongodb'
 import type { MongoDBAdapterParams, MongoDBAdapterOptions } from '@feathersjs/mongodb'
 
 import type { Application } from '../../declarations'
-import type { Request, RequestData, RequestPatch, RequestQuery } from './requests.schema'
+import type { Request, RequestData, RequestPatch, RequestQuery, Status } from './requests.schema'
 
 export type { Request, RequestData, RequestPatch, RequestQuery }
 
@@ -16,7 +16,19 @@ export class RequestService<ServiceParams extends Params = RequestParams> extend
   RequestData,
   RequestParams,
   RequestPatch
-> {}
+> {
+  async getCountByStatus(data: any, params: ServiceParams): Promise<{ status: Status; count: number }[]> {
+    const result = await this._find({
+      paginate: false,
+      pipeline: [
+        { $group: { _id: '$status', count: { $count: {} } } },
+        { $project: { _id: 0, status: '$_id', count: '$count' } }
+      ]
+    })
+
+    return result as any as { status: Status; count: number }[]
+  }
+}
 
 export const getOptions = (app: Application): MongoDBAdapterOptions => {
   return {

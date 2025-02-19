@@ -1,0 +1,15 @@
+meta {
+  name: Get total count by status
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{host}}/requests?countByStatus
+  body: none
+  auth: none
+}
+
+params:query {
+  countByStatus: 
+}

@@ -17,6 +17,7 @@ import {
 import type { Application } from '../../declarations'
 import { RequestService, getOptions } from './requests.class'
 import { requestPath, requestMethods } from './requests.shared'
+import { getCountByStatus } from '../../hooks/get-count-by-status'
 
 export * from './requests.class'
 export * from './requests.schema'
@@ -41,7 +42,7 @@ export const request = (app: Application) => {
     },
     before: {
       all: [schemaHooks.validateQuery(requestQueryValidator), schemaHooks.resolveQuery(requestQueryResolver)],
-      find: [],
+      find: [getCountByStatus],
       get: [],
       create: [schemaHooks.validateData(requestDataValidator), schemaHooks.resolveData(requestDataResolver)],
       patch: [schemaHooks.validateData(requestPatchValidator), schemaHooks.resolveData(requestPatchResolver)],
