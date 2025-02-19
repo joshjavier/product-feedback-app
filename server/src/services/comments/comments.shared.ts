@@ -7,7 +7,7 @@ export type { Comment, CommentData, CommentPatch, CommentQuery }
 
 export type CommentClientService = Pick<CommentService<Params<CommentQuery>>, (typeof commentMethods)[number]>
 
-export const commentPath = 'requests/:requestId/comments'
+export const commentPath = 'comments'
 
 export const commentMethods: Array<keyof CommentService> = ['find', 'get', 'create', 'patch', 'remove']
 

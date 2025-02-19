@@ -5,13 +5,9 @@ meta {
 }
 
 post {
-  url: {{host}}/requests/:requestId/comments
+  url: {{host}}/comments
   body: json
   auth: bearer
-}
-
-params:path {
-  requestId: 67b4f3ebfbc4293cbce9496a
 }
 
 auth:bearer {
@@ -20,6 +16,11 @@ auth:bearer {
 
 body:json {
   {
-    "content": "cool cool cool"
+    "content": "cool cool cool",
+    "requestId": "{{requestId}}"
   }
+}
+
+vars:post-response {
+  commentId: res.body._id
 }

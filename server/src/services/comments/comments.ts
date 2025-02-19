@@ -20,6 +20,7 @@ import { commentPath, commentMethods } from './comments.shared'
 import { logRuntime } from '../../hooks/log-runtime'
 import { resolveCommentTree } from '../../hooks/resolve-comment-tree'
 import { incrementCommentCount } from '../../hooks/increment-comment-count'
+import { decrementCommentCount } from '../../hooks/decrement-comment-count'
 
 export * from './comments.class'
 export * from './comments.schema'
@@ -47,12 +48,8 @@ export const comment = (app: Application) => {
       remove: [authenticate('jwt')]
     },
     before: {
-      all: [
-        schemaHooks.validateQuery(commentQueryValidator),
-        schemaHooks.resolveQuery(commentQueryResolver),
-        resolveCommentTree
-      ],
-      find: [],
+      all: [schemaHooks.validateQuery(commentQueryValidator), schemaHooks.resolveQuery(commentQueryResolver)],
+      find: [resolveCommentTree],
       get: [],
       create: [schemaHooks.validateData(commentDataValidator), schemaHooks.resolveData(commentDataResolver)],
       patch: [schemaHooks.validateData(commentPatchValidator), schemaHooks.resolveData(commentPatchResolver)],
@@ -61,6 +58,7 @@ export const comment = (app: Application) => {
     after: {
       all: [],
       create: [incrementCommentCount],
+      remove: [decrementCommentCount]
     },
     error: {
       all: []

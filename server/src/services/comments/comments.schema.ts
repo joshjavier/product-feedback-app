@@ -15,7 +15,7 @@ export const commentSchema = Type.Object(
   {
     _id: ObjectIdSchema(),
     content: Type.String(),
-    requestId: Type.Optional(ObjectIdSchema()),
+    requestId: ObjectIdSchema(),
     userId: Type.Optional(ObjectIdSchema()),
     parentId: Type.Optional(ObjectIdSchema()),
     user: Type.Ref(userSchema),
@@ -41,11 +41,6 @@ export const commentDataSchema = Type.Pick(
 export type CommentData = Static<typeof commentDataSchema>
 export const commentDataValidator = getValidator(commentDataSchema, dataValidator)
 export const commentDataResolver = resolve<Comment, HookContext<CommentService>>({
-  requestId: (value, comment, context) => {
-    if (context.data && context.params.route?.requestId) {
-      return resolveQueryObjectId(context.params.route.requestId)
-    }
-  },
   userId: (value, comment, context) => {
     if (context.params.user) {
       return context.params.user._id
@@ -79,10 +74,4 @@ export const commentQuerySchema = Type.Intersect(
 )
 export type CommentQuery = Static<typeof commentQuerySchema>
 export const commentQueryValidator = getValidator(commentQuerySchema, queryValidator)
-export const commentQueryResolver = resolve<CommentQuery, HookContext<CommentService>>({
-  requestId: (value, comment, context) => {
-    if (context.params.route?.requestId) {
-      return resolveQueryObjectId(context.params.route.requestId)
-    }
-  }
-})
+export const commentQueryResolver = resolve<CommentQuery, HookContext<CommentService>>({})

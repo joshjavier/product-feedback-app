@@ -5,11 +5,11 @@ meta {
 }
 
 get {
-  url: {{host}}/requests/:requestId/comments
+  url: {{host}}/comments?requestId={{requestId}}
   body: none
   auth: none
 }
 
-params:path {
-  requestId: 67b4f3ebfbc4293cbce9496b
+params:query {
+  requestId: {{requestId}}
 }

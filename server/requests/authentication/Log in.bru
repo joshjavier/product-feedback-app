@@ -21,3 +21,10 @@ body:json {
 vars:post-response {
   jwtToken: res.body.accessToken
 }
+
+docs {
+  ## POST /authentication
+  
+  - Create a test user before logging in.
+  - Once you're logged in, the access token will be saved in a variable `jwtToken` which can be used in other requests.
+}
