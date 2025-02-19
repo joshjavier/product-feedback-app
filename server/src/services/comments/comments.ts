@@ -19,6 +19,7 @@ import { CommentService, getOptions } from './comments.class'
 import { commentPath, commentMethods } from './comments.shared'
 import { logRuntime } from '../../hooks/log-runtime'
 import { resolveCommentTree } from '../../hooks/resolve-comment-tree'
+import { incrementCommentCount } from '../../hooks/increment-comment-count'
 
 export * from './comments.class'
 export * from './comments.schema'
@@ -58,7 +59,8 @@ export const comment = (app: Application) => {
       remove: []
     },
     after: {
-      all: []
+      all: [],
+      create: [incrementCommentCount],
     },
     error: {
       all: []

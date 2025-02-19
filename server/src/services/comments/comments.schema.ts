@@ -15,8 +15,8 @@ export const commentSchema = Type.Object(
   {
     _id: ObjectIdSchema(),
     content: Type.String(),
-    requestId: ObjectIdSchema(),
-    userId: ObjectIdSchema(),
+    requestId: Type.Optional(ObjectIdSchema()),
+    userId: Type.Optional(ObjectIdSchema()),
     parentId: Type.Optional(ObjectIdSchema()),
     user: Type.Ref(userSchema),
     replyingTo: Type.Optional(Type.String()),
@@ -40,7 +40,18 @@ export const commentDataSchema = Type.Pick(
 )
 export type CommentData = Static<typeof commentDataSchema>
 export const commentDataValidator = getValidator(commentDataSchema, dataValidator)
-export const commentDataResolver = resolve<Comment, HookContext<CommentService>>({})
+export const commentDataResolver = resolve<Comment, HookContext<CommentService>>({
+  requestId: (value, comment, context) => {
+    if (context.data && context.params.route?.requestId) {
+      return resolveQueryObjectId(context.params.route.requestId)
+    }
+  },
+  userId: (value, comment, context) => {
+    if (context.params.user) {
+      return context.params.user._id
+    }
+  }
+})
 
 // Schema for updating existing entries
 export const commentPatchSchema = Type.Partial(commentSchema, {
