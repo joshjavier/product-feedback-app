@@ -9,7 +9,7 @@ describe('users service', () => {
     assert.ok(service, 'Registered the service')
   })
 
-  it('finds all uers', async () => {
+  it('finds all users', async () => {
     const users = await app.service('users').find({
       paginate: false
     })
