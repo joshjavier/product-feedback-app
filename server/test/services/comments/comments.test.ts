@@ -17,6 +17,19 @@ describe('comments service', () => {
     assert.strictEqual(request.totalComments, comments.total)
   })
 
+  it('shows the comment tree of a request', async () => {
+    const [request] = await app.service('requests').find({ query: { $limit: 1 }, paginate: false })
+    const result = await app.service('comments').find({ query: { requestId: request._id, tree: '' } })
+
+    const comment = (result as any)[0]
+
+    // The `user` field should be populated
+    assert.ok(comment.user)
+    // Fields not needed in the frontend should be removed
+    assert.ok(!comment.requestId)
+    assert.ok(!comment.userId)
+  })
+
   it('adds a comment to a request', async () => {
     const [request] = await app.service('requests').find({ query: { $limit: 1 }, paginate: false })
     const commentData: CommentData = { content: 'that sounds cool', requestId: request._id }
