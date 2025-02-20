@@ -2,7 +2,13 @@
 import type { HookContext } from '../declarations'
 
 export const resolveCommentTree = async (context: HookContext) => {
+  if (context.params.query.tree === undefined) return
+
   context.params.paginate = false
+
+  // Remove `tree` from the query so it doesn't get added to the pipeline
+  context.params.query.tree = undefined
+
   context.params.pipeline = [
     { $match: { parentId: null } },
     {

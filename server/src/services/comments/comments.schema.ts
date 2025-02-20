@@ -8,7 +8,6 @@ import type { HookContext } from '../../declarations'
 import { dataValidator, queryValidator } from '../../validators'
 import type { CommentService } from './comments.class'
 import { userSchema } from '../users/users.schema'
-import { resolveQueryObjectId } from '@feathersjs/mongodb'
 
 // Main data model schema
 export const commentSchema = Type.Object(
@@ -68,7 +67,13 @@ export const commentQuerySchema = Type.Intersect(
   [
     querySyntax(commentQueryProperties),
     // Add additional query properties here
-    Type.Object({}, { additionalProperties: false })
+    Type.Object(
+      {
+        // Allow a `tree` query param for returning comments in tree view
+        tree: Type.Optional(Type.Any())
+      },
+      { additionalProperties: false }
+    )
   ],
   { additionalProperties: false }
 )

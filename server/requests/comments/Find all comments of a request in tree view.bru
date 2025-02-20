@@ -1,0 +1,16 @@
+meta {
+  name: Find all comments of a request in tree view
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{host}}/comments?requestId={{requestId}}&tree
+  body: none
+  auth: none
+}
+
+params:query {
+  requestId: {{requestId}}
+  tree: 
+}
