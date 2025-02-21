@@ -1,0 +1,19 @@
+meta {
+  name: Remove upvote
+  type: http
+  seq: 2
+}
+
+delete {
+  url: {{host}}/votes/?requestId={{requestId}}
+  body: none
+  auth: bearer
+}
+
+params:query {
+  requestId: {{requestId}}
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}

@@ -17,6 +17,7 @@ import {
 import type { Application } from '../../declarations'
 import { VoteService, getOptions } from './votes.class'
 import { votePath, voteMethods } from './votes.shared'
+import { syncUpvotes } from '../../hooks/sync-upvotes'
 
 export * from './votes.class'
 export * from './votes.schema'
@@ -48,7 +49,9 @@ export const vote = (app: Application) => {
       remove: []
     },
     after: {
-      all: []
+      all: [],
+      create: [syncUpvotes],
+      remove: [syncUpvotes]
     },
     error: {
       all: []

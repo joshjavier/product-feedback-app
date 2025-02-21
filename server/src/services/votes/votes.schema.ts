@@ -12,7 +12,9 @@ import type { VoteService } from './votes.class'
 export const voteSchema = Type.Object(
   {
     _id: ObjectIdSchema(),
-    text: Type.String()
+    userId: ObjectIdSchema(),
+    requestId: ObjectIdSchema(),
+    createdAt: Type.Number()
   },
   { $id: 'Vote', additionalProperties: false }
 )
@@ -23,12 +25,19 @@ export const voteResolver = resolve<Vote, HookContext<VoteService>>({})
 export const voteExternalResolver = resolve<Vote, HookContext<VoteService>>({})
 
 // Schema for creating new entries
-export const voteDataSchema = Type.Pick(voteSchema, ['text'], {
+export const voteDataSchema = Type.Pick(voteSchema, ['requestId'], {
   $id: 'VoteData'
 })
 export type VoteData = Static<typeof voteDataSchema>
 export const voteDataValidator = getValidator(voteDataSchema, dataValidator)
-export const voteDataResolver = resolve<Vote, HookContext<VoteService>>({})
+export const voteDataResolver = resolve<Vote, HookContext<VoteService>>({
+  userId: (value, vote, context) => {
+    if (context.params.user) {
+      return context.params.user._id
+    }
+  },
+  createdAt: () => Date.now()
+})
 
 // Schema for updating existing entries
 export const votePatchSchema = Type.Partial(voteSchema, {
@@ -39,7 +48,7 @@ export const votePatchValidator = getValidator(votePatchSchema, dataValidator)
 export const votePatchResolver = resolve<Vote, HookContext<VoteService>>({})
 
 // Schema for allowed query properties
-export const voteQueryProperties = Type.Pick(voteSchema, ['_id', 'text'])
+export const voteQueryProperties = Type.Pick(voteSchema, ['_id', 'requestId', 'userId'])
 export const voteQuerySchema = Type.Intersect(
   [
     querySyntax(voteQueryProperties),
@@ -50,4 +59,22 @@ export const voteQuerySchema = Type.Intersect(
 )
 export type VoteQuery = Static<typeof voteQuerySchema>
 export const voteQueryValidator = getValidator(voteQuerySchema, queryValidator)
-export const voteQueryResolver = resolve<VoteQuery, HookContext<VoteService>>({})
+export const voteQueryResolver = resolve<VoteQuery, HookContext<VoteService>>({
+  userId: (value, vote, context) => {
+    // We need to map the userId from the authenticated user when:
+    if (
+      // 1. removing an upvote from a request
+      context.method === 'remove' ||
+      // 2. getting all the upvoted requests by a user
+      (context.method === 'find' && context.params.query?.requestId === undefined)
+    ) {
+      return context.params.user?._id
+    }
+  },
+  // Make sure we can only delete one vote at a time
+  $limit: (value, vote, context) => {
+    if (context.method === 'remove') {
+      return 1
+    }
+  }
+})

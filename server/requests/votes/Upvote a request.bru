@@ -1,0 +1,25 @@
+meta {
+  name: Upvote a request
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/votes
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
+
+body:json {
+  {
+    "requestId": "{{requestId}}"
+  }
+}
+
+vars:post-response {
+  voteId: res.body._id
+}

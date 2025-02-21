@@ -21,6 +21,13 @@ export class VoteService<ServiceParams extends Params = VoteParams> extends Mong
 export const getOptions = (app: Application): MongoDBAdapterOptions => {
   return {
     paginate: app.get('paginate'),
-    Model: app.get('mongodbClient').then(db => db.collection('votes'))
+    Model: app
+      .get('mongodbClient')
+      .then(db => db.collection('votes'))
+      .then(collection => {
+        collection.createIndex({ requestId: 1, userId: 1 }, { unique: true })
+        return collection
+      }),
+    multi: ['remove']
   }
 }

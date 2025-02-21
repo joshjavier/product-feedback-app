@@ -1,0 +1,19 @@
+meta {
+  name: Get user by id
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{host}}/users?_id=67b81454c63559c5a12f27d7
+  body: none
+  auth: bearer
+}
+
+params:query {
+  _id: 67b81454c63559c5a12f27d7
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}

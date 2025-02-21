@@ -1,0 +1,19 @@
+meta {
+  name: Find users who upvoted a request
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{host}}/votes?requestId={{requestId}}
+  body: none
+  auth: bearer
+}
+
+params:query {
+  requestId: {{requestId}}
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
