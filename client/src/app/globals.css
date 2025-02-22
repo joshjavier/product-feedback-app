@@ -1,39 +1,30 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
-
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
+  --color-electric-violet: #ad1fea;
+  --color-royal-blue: #4661e6;
+  --color-rhino: #373f68;
+  --color-zircon: #f2f4ff;
+  --color-link-water: #f7f8fd;
+  --color-east-bay: #3a4374;
+  --color-lynch: #647196;
+  --color-tacao: #f49f85;
+  --color-malibu: #62bcfa;
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-link-water);
+  --foreground: var(--color-east-bay);
 }
 
+/*
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
+*/
 
 body {
   color: var(--foreground);
