@@ -1,4 +1,5 @@
-import CategoryRadioGroup from "./category-radio-group";
+import CategoryRadioGroup from "./components/category-radio-group";
+import SuggestionsList from "./components/suggestions-list";
 
 export default function Suggestions() {
   return (
@@ -29,7 +30,9 @@ export default function Suggestions() {
           <div className="rounded-[10] bg-rhino text-white py-3.5 px-3 md:px-4">
             SuggestionsHeader
           </div>
-          <div>Suggestions</div>
+          <div>
+            <SuggestionsList />
+          </div>
         </main>
       </div>
     </div>
