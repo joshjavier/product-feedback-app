@@ -1,18 +1,14 @@
 import RequestCard from "@/components/request-card";
-import client from "@/lib/client";
+import { Request } from "product-feedback";
 
-export default async function SuggestionsList() {
-  const sleep = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-
-  await sleep(5000);
-  const { data } = await client
-    .service("requests")
-    .find({ query: { status: "suggestion" } });
-
+export default function SuggestionsList({
+  suggestions,
+}: {
+  suggestions: Request[];
+}) {
   return (
     <ul className="flex flex-col gap-4">
-      {data.map((suggestion) => (
+      {suggestions.map((suggestion) => (
         <li key={suggestion._id.toString()}>
           <RequestCard request={suggestion} />
         </li>

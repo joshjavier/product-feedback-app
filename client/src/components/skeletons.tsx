@@ -25,3 +25,24 @@ export function CardListSkeleton() {
     </div>
   );
 }
+
+export function SuggestionsHeaderSkeleton() {
+  return (
+    <div className="rounded-[10] bg-rhino py-3.5 px-3 md:px-4">
+      <div className="animate-pulse flex gap-[38px] items-center">
+        <div className="bg-white/5 rounded-full w-[156] h-[26]"></div>
+        <div className="bg-white/5 rounded-full w-[160] h-5"></div>
+        <div className="bg-white/5 rounded-full w-[158] h-11 ml-auto"></div>
+      </div>
+    </div>
+  );
+}
+
+export function SuggestionsSkeleton() {
+  return (
+    <>
+      <SuggestionsHeaderSkeleton />
+      <CardListSkeleton />
+    </>
+  );
+}

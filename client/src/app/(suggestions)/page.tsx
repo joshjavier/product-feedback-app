@@ -1,9 +1,15 @@
-import { CardListSkeleton } from "@/components/skeletons";
+import { SuggestionsSkeleton } from "@/components/skeletons";
 import CategoryRadioGroup from "./components/category-radio-group";
-import SuggestionsList from "./components/suggestions-list";
+import Suggestions from "./components/suggestions";
 import { Suspense } from "react";
 
-export default function Suggestions() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | undefined }>;
+}) {
+  const { category } = await searchParams;
+
   return (
     <div className="box-content max-w-[1110] mx-auto px-6 sm:px-10">
       <div className="flex max-lg:flex-col gap-x-[30] gap-y-10 py-14 lg:pt-[94] pb-[129]">
@@ -29,11 +35,8 @@ export default function Suggestions() {
           </div>
         </div>
         <main className="flex flex-col grow gap-6">
-          <div className="rounded-[10] bg-rhino text-white py-3.5 px-3 md:px-4">
-            SuggestionsHeader
-          </div>
-          <Suspense fallback={<CardListSkeleton />}>
-            <SuggestionsList />
+          <Suspense fallback={<SuggestionsSkeleton />}>
+            <Suggestions category={category} />
           </Suspense>
         </main>
       </div>
