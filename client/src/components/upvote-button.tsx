@@ -4,12 +4,16 @@ import ArrowUp from "@/icons/icon-arrow-up.svg";
 import { useState } from "react";
 
 interface Props {
-  total: number;
+  total?: number;
   className?: string;
   "data-lock"?: string;
 }
 
-export default function UpvoteButton({ total, className, ...props }: Props) {
+export default function UpvoteButton({
+  total = 0,
+  className,
+  ...props
+}: Props) {
   const [active, setActive] = useState(false);
 
   return (

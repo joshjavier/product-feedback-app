@@ -1,5 +1,7 @@
+import { CardListSkeleton } from "@/components/skeletons";
 import CategoryRadioGroup from "./components/category-radio-group";
 import SuggestionsList from "./components/suggestions-list";
+import { Suspense } from "react";
 
 export default function Suggestions() {
   return (
@@ -30,9 +32,9 @@ export default function Suggestions() {
           <div className="rounded-[10] bg-rhino text-white py-3.5 px-3 md:px-4">
             SuggestionsHeader
           </div>
-          <div>
+          <Suspense fallback={<CardListSkeleton />}>
             <SuggestionsList />
-          </div>
+          </Suspense>
         </main>
       </div>
     </div>
