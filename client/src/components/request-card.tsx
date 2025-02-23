@@ -1,19 +1,8 @@
 import CommentCount from "./comment-count";
 import UpvoteButton from "./upvote-button";
+import { Request } from "product-feedback";
 
-interface Props {
-  request: {
-    _id: string;
-    title: string;
-    description: string;
-    category: string;
-    status: string;
-    upvotes?: number;
-    totalComments?: number;
-  };
-}
-
-export default function RequestCard({ request }: Props) {
+export default function RequestCard({ request }: { request: Request }) {
   return (
     <article className="sm:flex bg-white rounded-[10] p-6 sm:py-7 sm:px-8 text-[13px] sm:text-base/[normal]">
       <div>
