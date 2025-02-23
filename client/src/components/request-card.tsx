@@ -9,7 +9,7 @@ export default function RequestCard() {
       <p>description</p>
       <p>category</p>
       <UpvoteButton total={99} />
-      <CommentCount />
+      <CommentCount total={2} />
     </article>
   );
 }
