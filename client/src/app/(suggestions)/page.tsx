@@ -23,7 +23,7 @@ export default async function Page({
             </h1>
           </div>
           <div className="bg-white rounded-[10] p-6">
-            <CategoryRadioGroup />
+            <CategoryRadioGroup selectedValue={category} />
           </div>
           <div className="bg-white rounded-[10] p-6 pt-[19]">
             <p>Roadmap</p>

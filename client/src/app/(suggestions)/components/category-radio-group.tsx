@@ -1,39 +1,38 @@
-"use client";
-
 import Link from "next/link";
-import { Request } from "product-feedback";
-import { useState } from "react";
 
-function CategoryLink({
-  value,
-  children,
+const categories = [
+  { label: "All", value: undefined },
+  { label: "UI", value: "ui" },
+  { label: "UX", value: "ux" },
+  { label: "Enhancement", value: "enhancement" },
+  { label: "Feature", value: "feature" },
+  { label: "Bug", value: "bug" },
+];
+
+export default function CategoryRadioGroup({
+  selectedValue,
 }: {
-  value?: Request["category"];
-  children: React.ReactNode;
+  selectedValue?: string;
 }) {
-  const href = value ? `/?category=${value}` : "/";
-  return (
-    <Link
-      href={href}
-      className="inline-flex justify-center items-center bg-zircon hover:bg-periwinkle text-royal-blue text-[13px] font-semibold px-4 min-w-12 min-h-[30] rounded-[10] transition-colors"
-    >
-      {children}
-    </Link>
-  );
-}
-
-export default function CategoryRadioGroup() {
-  const [active, setActive] = useState(0);
+  const getClassName = (value?: string) =>
+    `${
+      value === selectedValue
+        ? "bg-royal-blue text-white "
+        : "bg-zircon hover:bg-periwinkle text-royal-blue "
+    }inline-flex justify-center items-center text-[13px] font-semibold px-4 min-w-12 min-h-[30] rounded-[10] transition-colors`;
 
   return (
     <div className="flex flex-wrap gap-3.5">
       <p className="sr-only">Categories</p>
-      <CategoryLink>All</CategoryLink>
-      <CategoryLink value="ui">UI</CategoryLink>
-      <CategoryLink value="ux">UX</CategoryLink>
-      <CategoryLink value="enhancement">Enhancement</CategoryLink>
-      <CategoryLink value="feature">Feature</CategoryLink>
-      <CategoryLink value="bug">Bug</CategoryLink>
+      {categories.map(({ label, value }) => (
+        <Link
+          key={value}
+          href={value ? `/?category=${value}` : "/"}
+          className={getClassName(value)}
+        >
+          {label}
+        </Link>
+      ))}
     </div>
   );
 }
