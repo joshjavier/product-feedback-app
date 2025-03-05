@@ -9,7 +9,7 @@ const categories = [
   { label: "Bug", value: "bug" },
 ];
 
-export default function CategoryRadioGroup({
+export default function CategoryNavigation({
   selectedValue,
 }: {
   selectedValue?: string;
@@ -26,7 +26,7 @@ export default function CategoryRadioGroup({
       <p className="sr-only">Categories</p>
       {categories.map(({ label, value }) => (
         <Link
-          key={value}
+          key={label}
           href={value ? `/?category=${value}` : "/"}
           className={getClassName(value)}
         >

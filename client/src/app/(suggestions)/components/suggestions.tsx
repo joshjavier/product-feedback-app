@@ -16,7 +16,7 @@ export default async function Suggestions({ category }: { category?: string }) {
 
   return (
     <>
-      <div className="flex gap-[38px] items-center rounded-[10] bg-rhino text-white py-3.5 px-3 md:px-4">
+      <div className="flex gap-[38px] items-center md:rounded-[10] bg-rhino text-white py-3.5 px-3 md:px-4 max-sm:-mx-6 max-md:-mx-10">
         <div className="hidden sm:block">{total} Suggestions</div>
         <div>Sort by : Most Upvotes</div>
         <button className="ml-auto cursor-pointer bg-electric-violet hover:bg-[#C75AF6] text-zircon min-w-[134] sm:min-w-[158] min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors">
