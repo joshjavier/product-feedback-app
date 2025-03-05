@@ -1,6 +1,6 @@
-import StatusIndicator from "@/components/status-indicator";
-import client from "@/lib/client";
 import Link from "next/link";
+import client from "@/lib/client";
+import StatusIndicator from "@/components/status-indicator";
 
 export default async function StatusSummary() {
   const data = (await client

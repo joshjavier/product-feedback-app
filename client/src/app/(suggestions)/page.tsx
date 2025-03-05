@@ -1,7 +1,6 @@
-import { SuggestionsSkeleton } from "@/components/skeletons";
-import CategoryNavigation from "./components/category-navigation";
-import Suggestions from "./components/suggestions";
 import { Suspense } from "react";
+import { SuggestionsSkeleton } from "@/components/skeletons";
+import Suggestions from "./components/suggestions";
 import SidebarDrawer from "./components/sidebar-drawer";
 
 export default async function Page({
