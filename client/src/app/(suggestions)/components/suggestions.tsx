@@ -3,15 +3,24 @@ import SuggestionsList from "./suggestions-list";
 import client from "@/lib/client";
 import { Request } from "product-feedback";
 import IconSuggestions from "@/icons/icon-suggestions.svg";
+import SelectSort from "./select-sort";
 
-export default async function Suggestions({ category }: { category?: string }) {
+export default async function Suggestions({
+  category,
+  sort,
+}: {
+  category?: string;
+  sort?: string;
+}) {
   // Simulate delay to see the skeleton loader
   await sleep(5000);
 
+  const [field, order] = sort ? sort.split(".") : ["upvotes", -1];
   const { total, data } = await client.service("requests").find({
     query: {
       status: "suggestion",
       category: category as Request["category"],
+      $sort: { [field]: Number(order) },
     },
   });
 
@@ -24,7 +33,7 @@ export default async function Suggestions({ category }: { category?: string }) {
             {total} {total === 1 ? "Suggestion" : "Suggestions"}
           </span>
         </div>
-        <div>Sort by : Most Upvotes</div>
+        <SelectSort />
         <button className="ml-auto cursor-pointer bg-electric-violet hover:bg-[#C75AF6] text-zircon min-w-[134] sm:min-w-[158] min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors">
           + Add Feedback
         </button>

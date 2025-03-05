@@ -59,7 +59,9 @@ export const requestQueryProperties = Type.Pick(requestSchema, [
   'title',
   'category',
   'status',
-  'description'
+  'description',
+  'upvotes',
+  'totalComments'
 ])
 export const requestQuerySchema = Type.Intersect(
   [

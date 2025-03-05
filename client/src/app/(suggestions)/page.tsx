@@ -8,7 +8,7 @@ export default async function Page({
 }: {
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
-  const { category } = await searchParams;
+  const { category, sort } = await searchParams;
 
   return (
     <div className="box-content max-w-[1110] mx-auto px-6 sm:px-10">
@@ -16,7 +16,7 @@ export default async function Page({
         <SidebarDrawer category={category} />
         <main className="flex flex-col grow gap-6">
           <Suspense fallback={<SuggestionsSkeleton />}>
-            <Suggestions category={category} />
+            <Suggestions category={category} sort={sort} />
           </Suspense>
         </main>
       </div>
