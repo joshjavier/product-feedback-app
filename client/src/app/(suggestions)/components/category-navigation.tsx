@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const categories = [
   { label: "All", value: undefined },
@@ -9,17 +12,24 @@ const categories = [
   { label: "Bug", value: "bug" },
 ];
 
-export default function CategoryNavigation({
-  selectedValue,
-}: {
-  selectedValue?: string;
-}) {
+export default function CategoryNavigation() {
+  const searchParams = useSearchParams();
   const getClassName = (value?: string) =>
     `${
-      value === selectedValue
+      searchParams.get("category") == value
         ? "bg-royal-blue text-white "
         : "bg-zircon hover:bg-periwinkle text-royal-blue "
     }inline-flex justify-center items-center text-[13px] font-semibold px-4 min-w-12 min-h-[30] rounded-[10] transition-colors`;
+
+  const createQueryString = (value?: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) {
+      params.set("category", value);
+    } else {
+      params.delete("category");
+    }
+    return params.toString();
+  };
 
   return (
     <div className="flex flex-wrap gap-3.5">
@@ -27,7 +37,7 @@ export default function CategoryNavigation({
       {categories.map(({ label, value }) => (
         <Link
           key={label}
-          href={value ? `/?category=${value}` : "/"}
+          href={`?${createQueryString(value)}`}
           className={getClassName(value)}
         >
           {label}
