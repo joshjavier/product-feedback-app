@@ -8,7 +8,7 @@ export default function SidebarDrawer({ category }: { category?: string }) {
       {/* The one checkbox to rule them all */}
       <input type="checkbox" id="drawer-toggle" className="peer hidden" />
       {/* Mobile header */}
-      <div className="md:hidden fixed top-0 w-full flex gap-4 justify-between items-center bg-electric-violet text-white pt-4 pb-[15] px-6 -mx-6 sm:-mx-10">
+      <div className="md:hidden fixed top-0 w-full flex gap-4 justify-between items-center bg-electric-violet bg-[url(/assets/suggestions/mobile/background-header.png)] bg-cover text-white pt-4 pb-[15] px-6 -mx-6 sm:-mx-10">
         <div>
           <p className="font-bold text-[15px] tracking-[-0.19px]">
             Frontend Mentor
@@ -23,7 +23,7 @@ export default function SidebarDrawer({ category }: { category?: string }) {
       <div className="peer-checked:max-md:block hidden bg-black/50 fixed inset-0 top-[72]"></div>
       {/* Container for drawer (on mobile) and sidebar (on desktop) */}
       <div className="peer-checked:max-md:translate-x-0 peer-checked:max-md:z-20 translate-x-full transition-transform md:contents fixed top-[72] right-0 bottom-0 w-full max-w-[271] bg-link-water p-6 flex flex-col gap-6">
-        <div className="max-md:hidden md:max-lg:flex-1 bg-electric-violet text-white rounded-[10] p-6 lg:min-h-[137] flex flex-col justify-end">
+        <div className="max-md:hidden md:max-lg:flex-1 bg-electric-violet bg-cover md:bg-[url(/assets/suggestions/tablet/background-header.png)] lg:bg-[url(/assets/suggestions/desktop/background-header.png)] text-white rounded-[10] p-6 lg:min-h-[137] flex flex-col justify-end">
           <p className="font-bold text-xl/[normal] tracking-[-0.25px]">
             Frontend Mentor
           </p>
