@@ -60,7 +60,11 @@ export default function SelectSort() {
         <div className="group-hover:opacity-75 text-sm/[normal]">
           Sort by : <span className="font-bold">{selectedItem?.label}</span>
         </div>
-        {isOpen ? <IconArrowUp /> : <IconArrowDown />}
+        {isOpen ? (
+          <IconArrowUp className="shrink-0" />
+        ) : (
+          <IconArrowDown className="shrink-0" />
+        )}
       </div>
       <ul
         className={clsx(
