@@ -1,7 +1,9 @@
 import Link from "next/link";
 import client from "@/lib/client";
+import { Comment } from "product-feedback";
 import RequestCard from "@/components/request-card";
 import BackButton from "@/components/back-button";
+import CommentCard from "./components/comment-card";
 
 export default async function Page({
   params,
@@ -10,6 +12,9 @@ export default async function Page({
 }) {
   const { id } = await params;
   const request = await client.service("requests").get(id);
+  const comments = (await client
+    .service("comments")
+    .find({ query: { requestId: id, tree: "" } })) as unknown as Comment[];
 
   return (
     <div className="box-content max-w-[730] mx-auto px-6 sm:px-10">
@@ -24,7 +29,18 @@ export default async function Page({
           </Link>
         </div>
         <RequestCard request={request} />
-        <div>Comments</div>
+        <div className="bg-white rounded-[10] p-6 sm:px-8">
+          <h2 className="font-bold text-lg/[normal] tracking-[-0.25px] mb-6 sm:mb-7">
+            {request.totalComments} Comments
+          </h2>
+          <ul>
+            {comments.map((comment) => (
+              <li key={comment._id.toString()}>
+                <CommentCard comment={comment} />
+              </li>
+            ))}
+          </ul>
+        </div>
         <div>Add Comment</div>
       </div>
     </div>
