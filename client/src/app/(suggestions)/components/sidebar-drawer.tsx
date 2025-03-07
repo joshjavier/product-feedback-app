@@ -2,7 +2,7 @@ import IconHamburger from "@/icons/icon-hamburger.svg";
 import CategoryNavigation from "./category-navigation";
 import StatusSummary from "./status-summary";
 
-export default function SidebarDrawer({ category }: { category?: string }) {
+export default function SidebarDrawer() {
   return (
     <div className="md:flex gap-x-2.5 gap-y-6 lg:flex-col lg:max-w-[255] shrink-0">
       {/* The one checkbox to rule them all */}
@@ -30,7 +30,7 @@ export default function SidebarDrawer({ category }: { category?: string }) {
           <h1 className="opacity-75 font-medium text-[15px]">Feedback Board</h1>
         </div>
         <div className="bg-white rounded-[10] p-6 md:max-lg:flex-1">
-          <CategoryNavigation selectedValue={category} />
+          <CategoryNavigation />
         </div>
         <div className="bg-white rounded-[10] p-6 pt-[19] md:max-lg:flex-1">
           <StatusSummary />

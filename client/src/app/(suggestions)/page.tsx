@@ -13,7 +13,7 @@ export default async function Page({
   return (
     <div className="box-content max-w-[1110] mx-auto px-6 sm:px-10">
       <div className="max-md:mt-[72] md:flex max-lg:flex-col gap-x-[30] gap-y-10 md:py-14 lg:pt-[94] pb-[129]">
-        <SidebarDrawer category={category} />
+        <SidebarDrawer />
         <main className="flex flex-col grow gap-6">
           <Suspense fallback={<SuggestionsSkeleton />}>
             <Suggestions category={category} sort={sort} />
