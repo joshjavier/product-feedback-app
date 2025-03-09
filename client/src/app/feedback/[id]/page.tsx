@@ -4,6 +4,7 @@ import { Comment } from "product-feedback";
 import RequestCard from "@/components/request-card";
 import BackButton from "@/components/back-button";
 import CommentCard from "./components/comment-card";
+import AddComment from "./components/add-comment";
 
 export default async function Page({
   params,
@@ -23,7 +24,7 @@ export default async function Page({
           <BackButton />
           <Link
             href={`${id}/edit`}
-            className="flex items-center justify-center bg-royal-blue hover:bg-[#7c91f9] text-zircon min-w-[134] sm:min-w-[158] min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors"
+            className="flex items-center justify-center bg-royal-blue hover:bg-[#7c91f9] text-zircon min-w-[119] sm:min-w-[142] min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors"
           >
             Edit Feedback
           </Link>
@@ -44,7 +45,9 @@ export default async function Page({
             ))}
           </ul>
         </div>
-        <div>Add Comment</div>
+        <div className="bg-white rounded-[10] p-6 sm:pl-[34] sm:pr-8 sm:pb-8">
+          <AddComment />
+        </div>
       </div>
     </div>
   );
