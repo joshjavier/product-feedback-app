@@ -29,13 +29,16 @@ export default async function Page({
           </Link>
         </div>
         <RequestCard request={request} />
-        <div className="bg-white rounded-[10] p-6 sm:px-8">
+        <div className="bg-white rounded-[10] p-6 sm:px-8 sm:pb-12">
           <h2 className="font-bold text-lg/[normal] tracking-[-0.25px] mb-6 sm:mb-7">
             {request.totalComments} Comments
           </h2>
-          <ul>
+          <ul className="divide-y divide-[#8c92b340]">
             {comments.map((comment) => (
-              <li key={comment._id.toString()}>
+              <li
+                key={comment._id.toString()}
+                className="py-6 sm:py-8 first:pt-0 last:pb-0"
+              >
                 <CommentCard comment={comment} />
               </li>
             ))}
