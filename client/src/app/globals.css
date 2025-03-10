@@ -11,6 +11,7 @@
   --color-tacao: #f49f85;
   --color-malibu: #62bcfa;
   --color-periwinkle: #cfd7ff;
+  --color-error: #d73737;
 }
 
 @layer components {
