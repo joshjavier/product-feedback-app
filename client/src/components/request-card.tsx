@@ -1,3 +1,4 @@
+import Link from "next/link";
 import CommentCount from "./comment-count";
 import UpvoteButton from "./upvote-button";
 import { Request } from "product-feedback";
@@ -7,9 +8,12 @@ export default function RequestCard({ request }: { request: Request }) {
     <article className="sm:flex bg-white rounded-[10] p-6 sm:py-7 sm:px-8 text-[13px] sm:text-base/[normal]">
       <div>
         <h3 className="font-bold sm:text-lg/[normal] tracking-[-0.18px] sm:tracking-[-0.25px]">
-          <a href="#" className="hover:text-royal-blue">
+          <Link
+            href={`/feedback/${request._id}`}
+            className="hover:text-royal-blue"
+          >
             {request.title}
-          </a>
+          </Link>
         </h3>
         <p className="sr-only">{request.status}</p>
         <p className="description mt-[9px] sm:mt-1">{request.description}</p>

@@ -4,23 +4,31 @@ import clsx from "clsx";
 import { useForm } from "react-hook-form";
 import { RequestData } from "product-feedback";
 import SelectCategory from "@/components/select-category";
+import SelectStatus from "@/components/select-status";
 
-export default function CreateNewFeedback() {
+export default function EditFeedback({ request }: { request: RequestData }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
   } = useForm<RequestData>({
-    defaultValues: { title: "", category: "feature", description: "" },
+    defaultValues: {
+      title: request.title,
+      category: request.category,
+      description: request.description,
+      status: request.status,
+    },
   });
 
-  const onSubmit = (data: unknown) => console.log(data);
+  const onSubmit = (data: RequestData) => {
+    console.log(data);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h1 className="mb-6 sm:mb-10 font-bold text-lg/[normal] sm:text-2xl/[normal] tracking-[-0.25px] sm:tracking-[-0.33px]">
-        Create New Feedback
+        Editing &lsquo;{request.title}&rsquo;
       </h1>
       <div className="space-y-6 [&_p]:mt-0.5">
         {/* Feedback Title */}
@@ -57,6 +65,13 @@ export default function CreateNewFeedback() {
           rules={{ required: true }}
         />
 
+        {/* Update Status */}
+        <SelectStatus
+          control={control}
+          name="status"
+          rules={{ required: true }}
+        />
+
         {/* Description */}
         <div className="text-[13px] sm:text-sm/[normal]">
           <label
@@ -87,14 +102,36 @@ export default function CreateNewFeedback() {
         </div>
       </div>
       <div className="flex max-sm:flex-col max-sm:items-stretch items-center justify-end gap-4 mt-10 sm:mt-8">
-        <button className="hidden sm:flex cursor-pointer shrink-0 items-center justify-center bg-east-bay hover:bg-[#656ea3] text-zircon px-4 sm:px-6 min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors">
+        {/* Desktop only buttons */}
+        <button
+          type="button"
+          className="mr-auto hidden sm:flex cursor-pointer shrink-0 items-center justify-center bg-error hover:bg-[#e98888] text-zircon px-4 sm:px-6 min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors"
+        >
+          Delete
+        </button>
+        <button
+          type="button"
+          className="hidden sm:flex cursor-pointer shrink-0 items-center justify-center bg-east-bay hover:bg-[#656ea3] text-zircon px-4 sm:px-6 min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors"
+        >
           Cancel
         </button>
+
         <button className="cursor-pointer flex shrink-0 items-center justify-center bg-electric-violet hover:bg-[#c75af6] text-zircon px-4 sm:px-6 min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors">
-          Add Feedback
+          Save Changes
         </button>
-        <button className="sm:hidden cursor-pointer flex shrink-0 items-center justify-center bg-east-bay hover:bg-[#656ea3] text-zircon px-4 sm:px-6 min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors">
+
+        {/* Mobile only buttons */}
+        <button
+          type="button"
+          className="sm:hidden cursor-pointer flex shrink-0 items-center justify-center bg-east-bay hover:bg-[#656ea3] text-zircon px-4 sm:px-6 min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors"
+        >
           Cancel
+        </button>
+        <button
+          type="button"
+          className="sm:hidden cursor-pointer flex shrink-0 items-center justify-center bg-error hover:bg-[#e98888] text-zircon px-4 sm:px-6 min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors"
+        >
+          Delete
         </button>
       </div>
     </form>
