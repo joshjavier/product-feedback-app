@@ -9,7 +9,14 @@ export type RequestClientService = Pick<RequestService<Params<RequestQuery>>, (t
 
 export const requestPath = 'requests'
 
-export const requestMethods: Array<keyof RequestService> = ['find', 'get', 'create', 'patch', 'remove']
+export const requestMethods: Array<keyof RequestService> = [
+  'find',
+  'get',
+  'create',
+  'patch',
+  'remove',
+  'getRoadmap'
+]
 
 export const requestClient = (client: ClientApplication) => {
   const connection = client.get('connection')

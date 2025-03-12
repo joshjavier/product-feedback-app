@@ -28,6 +28,19 @@ export class RequestService<ServiceParams extends Params = RequestParams> extend
 
     return result as any as { status: Status; count: number }[]
   }
+
+  async getRoadmap(
+    data?: any,
+    params?: ServiceParams
+  ): Promise<{ _id: Status; total: number; requests: Request[] }[]> {
+    const result = await this._find({
+      paginate: false,
+      query: { status: { $in: ['planned', 'in-progress', 'live'] } },
+      pipeline: [{ $group: { _id: '$status', total: { $count: {} }, requests: { $push: '$$ROOT' } } }]
+    })
+
+    return result as any as { _id: Status; total: number; requests: Request[] }[]
+  }
 }
 
 export const getOptions = (app: Application): MongoDBAdapterOptions => {
