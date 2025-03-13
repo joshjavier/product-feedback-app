@@ -1,0 +1,25 @@
+.react-tabs__tab {
+  position: relative;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: -0.18px;
+  flex-grow: 1;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+
+  &:not([aria-selected="true"]) {
+    opacity: 40%;
+  }
+
+  &[aria-selected="true"]::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4.5px;
+    background-color: var(--tab-color, currentColor);
+  }
+}

@@ -1,11 +1,30 @@
-import BackButton from "@/components/back-button";
-import RequestCard from "@/components/request-card";
-import client from "@/lib/client";
 import Link from "next/link";
-import FeedbackList from "./feedback-list";
+import client from "@/lib/client";
+import BackButton from "@/components/back-button";
+import RoadmapTabs from "./roadmap-tabs";
+import { Request } from "product-feedback";
 
 export default async function Page() {
   const data = await client.service("requests").getRoadmap();
+  const total = data.reduce(
+    (result, item) => {
+      if (item._id !== "suggestion") {
+        result[item._id] = item.total;
+      }
+      return result;
+    },
+    { planned: 0, "in-progress": 0, live: 0 }
+  );
+
+  const items = data.reduce(
+    (result, item) => {
+      if (item._id !== "suggestion") {
+        result[item._id] = item.requests;
+      }
+      return result;
+    },
+    { planned: [], "in-progress": [], live: [] } as Record<string, Request[]>
+  );
 
   return (
     <div className="box-content max-w-[1110] mx-auto px-6 sm:px-10">
@@ -24,26 +43,7 @@ export default async function Page() {
             + Add Feedback
           </Link>
         </div>
-        <div className="mt-6 sm:mt-12 grid grid-cols-3 gap-2.5 lg:gap-[30]">
-          <FeedbackList
-            title="Planned"
-            total={data.find((item) => item._id === "planned")?.total}
-            description="Ideas prioritized for research"
-            items={data.find((item) => item._id === "planned")?.requests}
-          />
-          <FeedbackList
-            title="In-Progress"
-            total={data.find((item) => item._id === "in-progress")?.total}
-            description="Features currently being developed"
-            items={data.find((item) => item._id === "in-progress")?.requests}
-          />
-          <FeedbackList
-            title="Live"
-            total={data.find((item) => item._id === "live")?.total}
-            description="Released features"
-            items={data.find((item) => item._id === "live")?.requests}
-          />
-        </div>
+        <RoadmapTabs total={total} items={items} />
       </div>
     </div>
   );
