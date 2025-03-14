@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { useForm } from "react-hook-form";
 import { RequestData } from "product-feedback";
 import SelectCategory from "@/components/select-category";
+import { createFeedback } from "@/lib/actions";
 
 export default function CreateNewFeedback() {
   const {
@@ -15,7 +16,9 @@ export default function CreateNewFeedback() {
     defaultValues: { title: "", category: "feature", description: "" },
   });
 
-  const onSubmit = (data: unknown) => console.log(data);
+  const onSubmit = (data: RequestData) => {
+    createFeedback(data);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
