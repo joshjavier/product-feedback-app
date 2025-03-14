@@ -2,11 +2,13 @@
 
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
-import { RequestData } from "product-feedback";
+import { Request, RequestData } from "product-feedback";
 import SelectCategory from "@/components/select-category";
 import SelectStatus from "@/components/select-status";
+import { editFeedback } from "@/lib/actions";
+import Link from "next/link";
 
-export default function EditFeedback({ request }: { request: RequestData }) {
+export default function EditFeedback({ request }: { request: Request }) {
   const {
     register,
     handleSubmit,
@@ -21,8 +23,10 @@ export default function EditFeedback({ request }: { request: RequestData }) {
     },
   });
 
+  const editFeedbackWithId = editFeedback.bind(null, request._id.toString());
+
   const onSubmit = (data: RequestData) => {
-    console.log(data);
+    editFeedbackWithId(data);
   };
 
   return (
@@ -109,24 +113,24 @@ export default function EditFeedback({ request }: { request: RequestData }) {
         >
           Delete
         </button>
-        <button
-          type="button"
+        <Link
+          href={`/feedback/${request._id}`}
           className="hidden sm:flex cursor-pointer shrink-0 items-center justify-center bg-east-bay hover:bg-[#656ea3] text-zircon px-4 sm:px-6 min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors"
         >
           Cancel
-        </button>
+        </Link>
 
         <button className="cursor-pointer flex shrink-0 items-center justify-center bg-electric-violet hover:bg-[#c75af6] text-zircon px-4 sm:px-6 min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors">
           Save Changes
         </button>
 
         {/* Mobile only buttons */}
-        <button
-          type="button"
+        <Link
+          href={`/feedback/${request._id}`}
           className="sm:hidden cursor-pointer flex shrink-0 items-center justify-center bg-east-bay hover:bg-[#656ea3] text-zircon px-4 sm:px-6 min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors"
         >
           Cancel
-        </button>
+        </Link>
         <button
           type="button"
           className="sm:hidden cursor-pointer flex shrink-0 items-center justify-center bg-error hover:bg-[#e98888] text-zircon px-4 sm:px-6 min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors"

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export const config = {
-  matcher: "/feedback/(new|edit)",
+  matcher: ["/feedback/(new|edit)", "/feedback/:id/edit"],
 };
 
 export function middleware(request: NextRequest) {
