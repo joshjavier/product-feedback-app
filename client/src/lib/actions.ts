@@ -21,7 +21,7 @@ export async function createFeedback(data: RequestData) {
   }
 
   if (newFeedback) {
-    redirect(`/feedback/${newFeedback._id}`);
+    redirect(`/feedback/${newFeedback._id}`, RedirectType.replace);
   }
 }
 
@@ -41,6 +41,22 @@ export async function editFeedback(id: string, data: RequestData) {
   if (editedFeedback) {
     redirect(`/feedback/${id}`);
   }
+}
+
+export async function deleteFeedback(id: string) {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("feathers-jwt")?.value;
+
+  if (!accessToken) {
+    const from = encodeURIComponent(`/feedback/${id}/edit`);
+    redirect(`/login?from=${from}`);
+  }
+
+  await client
+    .service("requests")
+    .remove(id, { headers: { Authorization: `Bearer ${accessToken}` } });
+
+  redirect("/", RedirectType.replace);
 }
 
 export async function signIn(

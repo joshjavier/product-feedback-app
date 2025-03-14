@@ -1,14 +1,17 @@
 "use client";
 
 import clsx from "clsx";
+import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Request, RequestData } from "product-feedback";
+import { deleteFeedback, editFeedback } from "@/lib/actions";
 import SelectCategory from "@/components/select-category";
 import SelectStatus from "@/components/select-status";
-import { editFeedback } from "@/lib/actions";
-import Link from "next/link";
+import DeleteFeedbackModal from "./delete-feedback-modal";
 
 export default function EditFeedback({ request }: { request: Request }) {
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -24,10 +27,21 @@ export default function EditFeedback({ request }: { request: Request }) {
   });
 
   const editFeedbackWithId = editFeedback.bind(null, request._id.toString());
+  const deleteFeedbackWithId = deleteFeedback.bind(
+    null,
+    request._id.toString()
+  );
 
   const onSubmit = (data: RequestData) => {
     editFeedbackWithId(data);
   };
+
+  const onConfirmDelete = () => {
+    deleteFeedbackWithId();
+  };
+
+  const openModal = () => setDeleteModalOpen(true);
+  const closeModal = () => setDeleteModalOpen(false);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -109,6 +123,7 @@ export default function EditFeedback({ request }: { request: Request }) {
         {/* Desktop only buttons */}
         <button
           type="button"
+          onClick={openModal}
           className="mr-auto hidden sm:flex cursor-pointer shrink-0 items-center justify-center bg-error hover:bg-[#e98888] text-zircon px-4 sm:px-6 min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors"
         >
           Delete
@@ -133,11 +148,17 @@ export default function EditFeedback({ request }: { request: Request }) {
         </Link>
         <button
           type="button"
+          onClick={openModal}
           className="sm:hidden cursor-pointer flex shrink-0 items-center justify-center bg-error hover:bg-[#e98888] text-zircon px-4 sm:px-6 min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors"
         >
           Delete
         </button>
       </div>
+      <DeleteFeedbackModal
+        isOpen={isDeleteModalOpen}
+        onRequestClose={closeModal}
+        onConfirmDelete={onConfirmDelete}
+      />
     </form>
   );
 }
