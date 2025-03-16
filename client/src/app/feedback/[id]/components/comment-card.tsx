@@ -1,12 +1,50 @@
 "use client";
 
+import clsx from "clsx";
 import Image from "next/image";
-import { useState } from "react";
-import { Comment } from "product-feedback";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useController, useForm } from "react-hook-form";
+import { Comment, CommentData } from "product-feedback";
+import { addComment } from "@/lib/actions";
 
 export default function CommentCard({ comment }: { comment: Comment }) {
+  const { id } = useParams<{ id: string }>();
+  const {
+    handleSubmit,
+    control,
+    formState: { isSubmitSuccessful },
+    reset,
+  } = useForm<CommentData>({
+    defaultValues: {
+      content: "",
+      requestId: id,
+      parentId: comment.parentId ?? comment._id,
+      replyingTo: comment.user.username,
+    },
+  });
+  const { field, fieldState } = useController({
+    control,
+    name: "content",
+    rules: { required: "Can't be empty", maxLength: 250 },
+  });
   const [replying, setReplying] = useState(false);
-  const [reply, setReply] = useState("");
+
+  const onSubmit = (data: CommentData) => {
+    addComment(data);
+  };
+
+  const onToggleReplying = () => {
+    setReplying(!replying);
+    if (field.value === "") {
+      reset();
+    }
+  };
+
+  useEffect(() => {
+    reset();
+    setReplying(false);
+  }, [isSubmitSuccessful, reset]);
 
   return (
     <>
@@ -25,7 +63,7 @@ export default function CommentCard({ comment }: { comment: Comment }) {
           <p>@{comment.user.username}</p>
         </div>
         <button
-          onClick={() => setReplying(!replying)}
+          onClick={onToggleReplying}
           className="cursor-pointer font-semibold text-[13px] text-royal-blue hover:underline"
         >
           Reply
@@ -43,14 +81,24 @@ export default function CommentCard({ comment }: { comment: Comment }) {
             <div className="absolute bg-lynch/10 w-px top-1.5 -bottom-6 sm:-bottom-8 left-[-51]"></div>
           )}
           {replying && (
-            <form className="flex max-sm:flex-wrap gap-4 items-start mt-6">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex max-sm:flex-wrap gap-4 items-start mt-6"
+            >
               <textarea
-                name="reply"
-                placeholder="Type your comment here"
-                className="outline-0 inset-ring inset-ring-transparent focus:inset-ring-royal-blue bg-link-water w-full min-h-20 rounded-[5] p-4 sm:px-6 resize-none placeholder:text-[#8c92b3] text-[13px] sm:text-[15px]"
-                value={reply}
-                onChange={(e) => setReply(e.target.value)}
+                placeholder={
+                  fieldState.error
+                    ? fieldState.error.message
+                    : "Type your comment here"
+                }
+                className={clsx(
+                  fieldState.error
+                    ? "inset-ring-error"
+                    : "inset-ring-transparent",
+                  "outline-0 inset-ring focus:inset-ring-royal-blue bg-link-water w-full min-h-20 rounded-[5] p-4 sm:px-6 resize-none placeholder:text-[#8c92b3] text-[13px] sm:text-[15px]"
+                )}
                 maxLength={250}
+                {...field}
               />
               <button className="ml-auto cursor-pointer flex shrink-0 items-center justify-center bg-electric-violet hover:bg-[#c75af6] text-zircon px-4 sm:px-6 min-h-10 sm:min-h-11 rounded-[10] font-bold text-[13px] sm:text-sm/[normal] transition-colors">
                 Post Reply

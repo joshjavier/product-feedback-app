@@ -28,7 +28,7 @@ export const resolveCommentTree = async (context: HookContext) => {
             }
           },
           { $unwind: '$user' },
-          { $unset: ['requestId', 'parentId', 'userId'] }
+          { $unset: ['requestId', 'userId'] }
         ]
       }
     },
