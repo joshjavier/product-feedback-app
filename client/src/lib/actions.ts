@@ -1,10 +1,11 @@
 "use server";
 
-import { RequestData } from "product-feedback";
+import { RequestData, CommentData } from "product-feedback";
 import client from "./client";
 import { redirect, RedirectType } from "next/navigation";
 import { cookies } from "next/headers";
 import { ActionState } from "@/app/login/login-form";
+import { revalidatePath } from "next/cache";
 
 export async function createFeedback(data: RequestData) {
   const cookieStore = await cookies();
@@ -57,6 +58,24 @@ export async function deleteFeedback(id: string) {
     .remove(id, { headers: { Authorization: `Bearer ${accessToken}` } });
 
   redirect("/", RedirectType.replace);
+}
+
+export async function addComment(data: CommentData) {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("feathers-jwt")?.value;
+
+  if (!accessToken) {
+    const from = encodeURIComponent(`/feedback/${data.requestId}`);
+    redirect(`/login?from=${from}`);
+  }
+
+  const createdComment = await client
+    .service("comments")
+    .create(data, { headers: { Authorization: `Bearer ${accessToken}` } });
+
+  if (createdComment) {
+    revalidatePath(`/feedback/${createdComment.requestId}`);
+  }
 }
 
 export async function signIn(
