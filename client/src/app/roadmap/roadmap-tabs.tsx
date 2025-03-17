@@ -11,9 +11,14 @@ import "./roadmap-tabs.css";
 interface RoadmapTabsProps {
   total: Record<string, number>;
   items: Record<string, Request[]>;
+  upvotedIds?: string[];
 }
 
-export default function RoadmapTabs({ total, items }: RoadmapTabsProps) {
+export default function RoadmapTabs({
+  total,
+  items,
+  upvotedIds,
+}: RoadmapTabsProps) {
   const [isTabbed, setTabbed] = useState(false);
 
   const onResize = useCallback(() => {
@@ -62,6 +67,7 @@ export default function RoadmapTabs({ total, items }: RoadmapTabsProps) {
               total={total.planned}
               description="Ideas prioritized for research"
               items={items.planned}
+              upvotedIds={upvotedIds}
             />
           </TabPanel>
           <TabPanel>
@@ -70,6 +76,7 @@ export default function RoadmapTabs({ total, items }: RoadmapTabsProps) {
               total={total["in-progress"]}
               description="Features currently being developed"
               items={items["in-progress"]}
+              upvotedIds={upvotedIds}
             />
           </TabPanel>
           <TabPanel>
@@ -78,6 +85,7 @@ export default function RoadmapTabs({ total, items }: RoadmapTabsProps) {
               total={total.live}
               description="Released features"
               items={items.live}
+              upvotedIds={upvotedIds}
             />
           </TabPanel>
         </div>

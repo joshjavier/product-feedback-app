@@ -3,6 +3,7 @@ import client from "@/lib/client";
 import BackButton from "@/components/back-button";
 import RoadmapTabs from "./roadmap-tabs";
 import { Request } from "product-feedback";
+import { cookies } from "next/headers";
 
 export default async function Page() {
   const data = await client.service("requests").getRoadmap();
@@ -26,6 +27,10 @@ export default async function Page() {
     { planned: [], "in-progress": [], live: [] } as Record<string, Request[]>
   );
 
+  const cookieStore = await cookies();
+  const user = cookieStore.get("feathers-user")?.value;
+  const upvotedIds: string[] = user ? JSON.parse(user).upvotedIds ?? [] : [];
+
   return (
     <div className="box-content max-w-[1110] mx-auto px-6 sm:px-10">
       <div className="md:pt-14 lg:pt-[78] pb-24">
@@ -43,7 +48,7 @@ export default async function Page() {
             + Add Feedback
           </Link>
         </div>
-        <RoadmapTabs total={total} items={items} />
+        <RoadmapTabs total={total} items={items} upvotedIds={upvotedIds} />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import UpvoteButton from "./upvote-button";
 import { Request } from "product-feedback";
 import StatusIndicator from "./status-indicator";
 import clsx from "clsx";
+import { upvoteFeedback } from "@/lib/actions";
 
 const RequestLabel: Record<Request["category"], string> = {
   ui: "UI",
@@ -19,7 +20,20 @@ const bgColor: Record<string, string> = {
   live: "bg-malibu",
 };
 
-export default function RequestCard({ request }: { request: Request }) {
+interface RequestCardProps {
+  request: Request;
+  upvoted?: boolean;
+}
+
+export default function RequestCard({
+  request,
+  upvoted = false,
+}: RequestCardProps) {
+  const upvoteFeedbackWithId = upvoteFeedback.bind(
+    null,
+    request._id.toString()
+  );
+
   return (
     <article
       className={clsx(
@@ -63,6 +77,8 @@ export default function RequestCard({ request }: { request: Request }) {
         )}
       >
         <UpvoteButton
+          upvoted={upvoted}
+          upvote={upvoteFeedbackWithId}
           total={request.upvotes}
           className="sm:-order-1 sm:mr-10 shrink-0"
           data-lock={

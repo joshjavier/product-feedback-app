@@ -6,6 +6,7 @@ interface FeedbackListProps {
   description: string;
   total?: number;
   items?: Request[];
+  upvotedIds?: string[];
 }
 
 export default function FeedbackList({
@@ -13,6 +14,7 @@ export default function FeedbackList({
   total = 0,
   description,
   items,
+  upvotedIds,
 }: FeedbackListProps) {
   return (
     <div>
@@ -28,7 +30,10 @@ export default function FeedbackList({
         {items &&
           items.map((item) => (
             <li key={item._id.toString()}>
-              <RequestCard request={item} />
+              <RequestCard
+                request={item}
+                upvoted={upvotedIds?.includes(item._id.toString())}
+              />
             </li>
           ))}
       </ul>

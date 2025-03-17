@@ -60,6 +60,52 @@ export async function deleteFeedback(id: string) {
   redirect("/", RedirectType.replace);
 }
 
+export async function upvoteFeedback(requestId: string, votes: number = 1) {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("feathers-jwt")?.value;
+
+  if (!accessToken) {
+    const from = encodeURIComponent(`/feedback/${requestId}`);
+    redirect(`/login?from=${from}`);
+  }
+
+  if (votes === 1) {
+    // create upvote
+    const { userId } = await client
+      .service("votes")
+      .create(
+        { requestId },
+        { headers: { Authorization: `Bearer ${accessToken}` } }
+      );
+    // update cookie
+    const user = await client.service("users").get(userId.toString(), {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    cookieStore.set("feathers-user", JSON.stringify(user), {
+      httpOnly: true,
+      sameSite: "lax",
+      maxAge: 7200,
+    });
+  } else {
+    // remove upvote
+    const [{ userId }] = await client.service("votes").remove(null, {
+      query: { requestId },
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    // update cookie
+    const user = await client.service("users").get(userId.toString(), {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    cookieStore.set("feathers-user", JSON.stringify(user), {
+      httpOnly: true,
+      sameSite: "lax",
+      maxAge: 7200,
+    });
+  }
+
+  revalidatePath("/", "layout");
+}
+
 export async function addComment(data: CommentData) {
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("feathers-jwt")?.value;
@@ -96,6 +142,11 @@ export async function signIn(
 
     const cookieStore = await cookies();
     cookieStore.set("feathers-jwt", result.accessToken, {
+      httpOnly: true,
+      sameSite: "lax",
+      maxAge: 7200,
+    });
+    cookieStore.set("feathers-user", JSON.stringify(result.user), {
       httpOnly: true,
       sameSite: "lax",
       maxAge: 7200,

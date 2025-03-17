@@ -4,8 +4,10 @@ import { Request } from "product-feedback";
 
 export default function SuggestionsList({
   suggestions,
+  upvotedIds,
 }: {
   suggestions: Request[];
+  upvotedIds?: string[];
 }) {
   if (suggestions.length === 0) {
     return (
@@ -37,7 +39,10 @@ export default function SuggestionsList({
     <ul className="flex flex-col gap-4">
       {suggestions.map((suggestion) => (
         <li key={suggestion._id.toString()}>
-          <RequestCard request={suggestion} />
+          <RequestCard
+            request={suggestion}
+            upvoted={upvotedIds?.includes(suggestion._id.toString())}
+          />
         </li>
       ))}
     </ul>

@@ -17,7 +17,8 @@ export const userSchema = Type.Object(
     name: Type.Optional(Type.String()),
     password: Type.Optional(Type.String()),
     githubId: Type.Optional(Type.Number()),
-    avatar: Type.Optional(Type.String())
+    avatar: Type.Optional(Type.String()),
+    upvotedIds: Type.Optional(Type.Array(ObjectIdSchema()))
   },
   { $id: 'User', additionalProperties: false }
 )
@@ -51,7 +52,7 @@ export const userPatchResolver = resolve<User, HookContext<UserService>>({
 })
 
 // Schema for allowed query properties
-export const userQueryProperties = Type.Pick(userSchema, ['_id', 'username', 'githubId'])
+export const userQueryProperties = Type.Pick(userSchema, ['_id', 'username', 'githubId', 'upvotedIds'])
 export const userQuerySchema = Type.Intersect(
   [
     querySyntax(userQueryProperties),

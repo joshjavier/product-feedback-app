@@ -8,9 +8,11 @@ import SelectSort from "./select-sort";
 export default async function Suggestions({
   category,
   sort,
+  upvotedIds,
 }: {
   category?: string;
   sort?: string;
+  upvotedIds?: string[];
 }) {
   const [field, order] = sort ? sort.split(".") : ["upvotes", -1];
   const { total, data } = await client.service("requests").find({
@@ -38,7 +40,7 @@ export default async function Suggestions({
           + Add Feedback
         </Link>
       </div>
-      <SuggestionsList suggestions={data} />
+      <SuggestionsList suggestions={data} upvotedIds={upvotedIds} />
     </>
   );
 }

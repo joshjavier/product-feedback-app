@@ -1,5 +1,6 @@
 import Link from "next/link";
 import client from "@/lib/client";
+import { cookies } from "next/headers";
 import { Comment } from "product-feedback";
 import RequestCard from "@/components/request-card";
 import BackButton from "@/components/back-button";
@@ -16,6 +17,9 @@ export default async function Page({
   const comments = (await client
     .service("comments")
     .find({ query: { requestId: id, tree: "" } })) as unknown as Comment[];
+  const cookieStore = await cookies();
+  const user = cookieStore.get("feathers-user")?.value;
+  const upvotedIds: string[] = user ? JSON.parse(user).upvotedIds ?? [] : [];
 
   return (
     <div className="box-content max-w-[730] mx-auto px-6 sm:px-10">
@@ -29,7 +33,7 @@ export default async function Page({
             Edit Feedback
           </Link>
         </div>
-        <RequestCard request={request} />
+        <RequestCard request={request} upvoted={upvotedIds.includes(id)} />
         <div className="bg-white rounded-[10] p-6 sm:px-8 sm:pb-12">
           <h2 className="font-bold text-lg/[normal] tracking-[-0.25px] mb-6 sm:mb-7">
             {request.totalComments} Comments

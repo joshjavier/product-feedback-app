@@ -1,0 +1,19 @@
+meta {
+  name: Get a user's upvoted ids
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{host}}/users/67d6853224e6d90a1a0239c2?$select[]=upvotedIds
+  body: none
+  auth: bearer
+}
+
+params:query {
+  $select[]: upvotedIds
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
